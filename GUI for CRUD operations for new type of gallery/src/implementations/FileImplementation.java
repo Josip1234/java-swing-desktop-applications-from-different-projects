@@ -35,16 +35,20 @@ public class FileImplementation implements FileOperations {
 	}
 
 	@Override
-	public void readFromAFile(File file) {
+	public String readFromAFile(File file) {
+		String value="";
 		Scanner input = null;
 		try {
 			input=new Scanner(new FileInputStream(file.getFilename()));
-			String line = input.nextLine();
-			System.out.println(line);
+			value = input.nextLine();
+		
 		} catch (FileNotFoundException e) {
 			System.out.println(FileMessages.fileNotFound);
+			value="";
 			e.printStackTrace();
 		}
+		input.close();
+		return value;
 		
 	}
 

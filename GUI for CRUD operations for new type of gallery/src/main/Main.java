@@ -38,7 +38,8 @@ public class Main {
 	        FileImplementation fileImplementation = new FileImplementation();
 	        fileImplementation.writeToAFile(file, connection);
 	        //third use
-	        fileImplementation.readFromAFile(file);
+	        String value=fileImplementation.readFromAFile(file);
+	        System.out.println(value);
 
 	}
 
