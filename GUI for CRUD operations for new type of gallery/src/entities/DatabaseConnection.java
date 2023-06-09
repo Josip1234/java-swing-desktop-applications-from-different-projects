@@ -42,11 +42,10 @@ public void setPASS(String pASS) {
 }
 @Override
 public String toString() {
-	return "{"+"\"DatabaseConnection\""+":"+"{"+"\"JDBC_DRIVER\""+":"+"\"org.mariadb.jdbc.Driver\""+"," +"\"DB_URL\""+":"+"\"jdbc:mariadb://localhost/test\""+","+
-			"\"USER\""+":"+"\"root\""+","+
-			"\"PASS\""+":"+"\"\"}}";
-
+	return "{\"DatabaseConnection\":{\"JDBC_DRIVER\":\"" + JDBC_DRIVER + "\", \"DB_URL\":\"" + DB_URL
+			+ "\", \"USER\":\"" + USER + "\", \"PASS\":\"" + PASS + "\"}}\n";
 }
+
 
 
 
