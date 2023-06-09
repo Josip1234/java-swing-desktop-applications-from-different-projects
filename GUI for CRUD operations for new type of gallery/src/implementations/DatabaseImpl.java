@@ -19,25 +19,25 @@ public class DatabaseImpl implements DatabaseInterface {
 	@Override
 	public Connection openConnection(DatabaseConnection connection, Connection conn, Statement stmt) {
 	
-	       //STEP 2: Register JDBC driver
+        System.out.println(DatabaseMessages.connecting);
         try {
 			Class.forName(connection.getJDBC_DRIVER());
+			System.out.println(DatabaseMessages.driverRegistered);
 		
 		} catch (ClassNotFoundException e) {
-		
+		System.out.println(DatabaseMessages.driverNotRegistered);
 			e.printStackTrace();
 		}
 
-        //STEP 3: Open a connection
       
-        System.out.println(DatabaseMessages.connecting);
+
         try {
 			conn = DriverManager.getConnection(
 			        connection.getDB_URL(), connection.getUSER(), connection.getPASS());
 		
 		    System.out.println(DatabaseMessages.databaseIsConnected);
 		} catch (SQLException e) {
-	
+	System.out.println(DatabaseMessages.failedToConnectToDatabase);
 			e.printStackTrace();
 		}
     
@@ -50,16 +50,20 @@ public class DatabaseImpl implements DatabaseInterface {
 		try {
 			statement = con.createStatement();
 			done=true;
+			System.out.println(DatabaseMessages.databaseInsertWasSuccessfull);
 		} catch (SQLException e1) {
 			done=false;
+			System.out.println(DatabaseMessages.failedToInsertData);
 			e1.printStackTrace();
 		}
 
 		try {
 			statement.executeUpdate(query);
 			done=true;
+			System.out.println(DatabaseMessages.databaseInsertWasSuccessfull);
 		} catch (SQLException e) {
 			done=false;
+			System.out.println(DatabaseMessages.failedToInsertData);
 			e.printStackTrace();
 		}
 		return done;
