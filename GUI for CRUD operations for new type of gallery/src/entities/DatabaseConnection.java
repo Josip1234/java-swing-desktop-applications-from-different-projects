@@ -9,6 +9,7 @@ private String JDBC_DRIVER;
 private String DB_URL;
 private String USER;
 private String PASS;
+
 public DatabaseConnection(String jDBC_DRIVER, String dB_URL, String uSER, String pASS) {
 	JDBC_DRIVER = jDBC_DRIVER;
 	DB_URL = dB_URL;
@@ -38,6 +39,13 @@ public String getPASS() {
 }
 public void setPASS(String pASS) {
 	PASS = pASS;
+}
+@Override
+public String toString() {
+	return "{"+"\"DatabaseConnection\""+":"+"{"+"\"JDBC_DRIVER\""+":"+"\"org.mariadb.jdbc.Driver\""+"," +"\"DB_URL\""+":"+"\"jdbc:mariadb://localhost/test\""+","+
+			"\"USER\""+":"+"\"root\""+","+
+			"\"PASS\""+":"+"\"\"}}";
+
 }
 
 

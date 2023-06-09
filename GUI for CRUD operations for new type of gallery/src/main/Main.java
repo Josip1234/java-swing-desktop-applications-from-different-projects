@@ -13,6 +13,7 @@ public class Main {
 
 	public static void main(String[] args) {
 	        DatabaseConnection connection = new DatabaseConnection("org.mariadb.jdbc.Driver", "jdbc:mariadb://localhost/test", "root", "");
+	        System.out.println(connection);
 	        Connection conn = null;
 	        Statement stmt = null;
             DatabaseImpl databaseImpl = new DatabaseImpl();
@@ -26,7 +27,7 @@ public class Main {
                    databaseImpl.insertIntoDatabase(stmt, sql, conn);
                    conn=databaseImpl.closeConnection(stmt, conn);
 		
-		        
+		        System.out.println(connection);
 	
 
 	}
