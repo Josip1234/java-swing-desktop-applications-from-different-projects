@@ -7,13 +7,16 @@ import java.sql.Statement;
 
 import entities.DatabaseConnection;
 import entities.DatabaseMessages;
+import entities.File;
 import implementations.DatabaseImpl;
+import implementations.FileImplementation;
 
 public class Main {
 
 	public static void main(String[] args) {
+		//first use
 	        DatabaseConnection connection = new DatabaseConnection("org.mariadb.jdbc.Driver", "jdbc:mariadb://localhost/test", "root", "");
-	        System.out.println(connection);
+	        System.out.println(connection); 
 	        Connection conn = null;
 	        Statement stmt = null;
             DatabaseImpl databaseImpl = new DatabaseImpl();
@@ -29,6 +32,13 @@ public class Main {
 		
 		        System.out.println(connection);
 	
+	        
+	        //second use
+	        File file = new File();
+	        FileImplementation fileImplementation = new FileImplementation();
+	        fileImplementation.writeToAFile(file, connection);
+	        //third use
+	        fileImplementation.readFromAFile(file);
 
 	}
 
