@@ -5,71 +5,40 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class DatabaseConnection {
-private String db_driver;
-private String protocol;
-private String db_name;
-private Connection conn;
-private DriverManager driverManager;
-private Statement statement;
-
-public DatabaseConnection(String db_driver, String protocol, String db_name, Connection conn,
-		DriverManager driverManager, Statement statement) {
-	this.db_driver = db_driver;
-	this.protocol = protocol;
-	this.db_name = db_name;
-	this.conn = conn;
-	this.driverManager = driverManager;
-	this.statement = statement;
+private String JDBC_DRIVER;
+private String DB_URL;
+private String USER;
+private String PASS;
+public DatabaseConnection(String jDBC_DRIVER, String dB_URL, String uSER, String pASS) {
+	JDBC_DRIVER = jDBC_DRIVER;
+	DB_URL = dB_URL;
+	USER = uSER;
+	PASS = pASS;
 }
-
-public String getDb_driver() {
-	return db_driver;
+public String getJDBC_DRIVER() {
+	return JDBC_DRIVER;
 }
-
-public void setDb_driver(String db_driver) {
-	this.db_driver = db_driver;
+public void setJDBC_DRIVER(String jDBC_DRIVER) {
+	JDBC_DRIVER = jDBC_DRIVER;
 }
-
-public String getProtocol() {
-	return protocol;
+public String getDB_URL() {
+	return DB_URL;
 }
-
-public void setProtocol(String protocol) {
-	this.protocol = protocol;
+public void setDB_URL(String dB_URL) {
+	DB_URL = dB_URL;
 }
-
-public String getDb_name() {
-	return db_name;
+public String getUSER() {
+	return USER;
 }
-
-public void setDb_name(String db_name) {
-	this.db_name = db_name;
+public void setUSER(String uSER) {
+	USER = uSER;
 }
-
-public Connection getConn() {
-	return conn;
+public String getPASS() {
+	return PASS;
 }
-
-public void setConn(Connection conn) {
-	this.conn = conn;
+public void setPASS(String pASS) {
+	PASS = pASS;
 }
-
-public DriverManager getDriverManager() {
-	return driverManager;
-}
-
-public void setDriverManager(DriverManager driverManager) {
-	this.driverManager = driverManager;
-}
-
-public Statement getStatement() {
-	return statement;
-}
-
-public void setStatement(Statement statement) {
-	this.statement = statement;
-}
-
 
 
 
