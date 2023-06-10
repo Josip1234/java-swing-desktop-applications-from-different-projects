@@ -52,4 +52,13 @@ public class FileImplementation implements FileOperations {
 		
 	}
 
+	@Override
+	public boolean checkIfFileExists(File file) {
+		boolean exists=false;
+		java.io.File files = new java.io.File(file.getFilename());
+		if(files.exists()) exists=true;
+		else exists=false;
+		return exists;
+	}
+
 }

@@ -10,11 +10,18 @@ private String DB_URL;
 private String USER;
 private String PASS;
 
+public DatabaseConnection() {
+	this.JDBC_DRIVER = "";
+	this.DB_URL = "";
+	this.USER = "";
+	this.PASS = "";
+}
+
 public DatabaseConnection(String jDBC_DRIVER, String dB_URL, String uSER, String pASS) {
-	JDBC_DRIVER = jDBC_DRIVER;
-	DB_URL = dB_URL;
-	USER = uSER;
-	PASS = pASS;
+	this.JDBC_DRIVER = jDBC_DRIVER;
+	this.DB_URL = dB_URL;
+	this.USER = uSER;
+	this.PASS = pASS;
 }
 public String getJDBC_DRIVER() {
 	return JDBC_DRIVER;

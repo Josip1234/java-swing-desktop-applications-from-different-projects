@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="libs/jna-platform-5.12.1.jar"/>
 	<classpathentry kind="lib" path="libs/mariadb-java-client-3.1.4.jar"/>
 	<classpathentry kind="lib" path="libs/waffle-jna-3.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Korisnik/Desktop/java1.8/openlogic-openjdk-8u262-b10-mac-x64/jdk1.8.0_262.jdk/Contents/Home/jre/lib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
