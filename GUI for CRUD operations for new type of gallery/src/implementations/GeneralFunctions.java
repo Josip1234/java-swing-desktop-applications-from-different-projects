@@ -2,6 +2,7 @@ package implementations;
 
 import entities.DatabaseConnection;
 import entities.File;
+import entities.FileMessages;
 
 public class GeneralFunctions {
    
@@ -12,14 +13,17 @@ public class GeneralFunctions {
 	    FileImplementation fileImplementation = new FileImplementation();
 	    doesFileExists=fileImplementation.checkIfFileExists(file);
 	    if(doesFileExists==true) {
-	    	//čitaj iz file-a config
+	    	System.out.println(FileMessages.readingFromFile);
+	    	String value=fileImplementation.readFromAFile(file);
+	        System.out.println(value);
 	    	//stavi u text field
-	    	System.out.println("Čitam polja iz configa...");
+	    
 	    }else {
-	    	//stvori novi config upiši defaultne vrijednosti 
-	    	//javi poruku da se upišu prazna polja 
-	    	//ta polja pohrani u config
-	    	System.out.println("Stvaram novo polje...");
+	     
+            
+            System.out.println(FileMessages.writingToAFile);
+	        fileImplementation.writeToAFile(file, connection);
+	    	
 	    }
 	}
 }

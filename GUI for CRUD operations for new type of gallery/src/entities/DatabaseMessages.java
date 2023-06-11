@@ -10,4 +10,5 @@ public static String failedToInsertData="Insert data in database was not success
 public static String databaseInsertWasSuccessfull="Data has been inserted";
 public static String driverNotRegistered="There is a problem with jdbc driver. Check config.";
 public static String driverRegistered="Driver is successfully registered.";
+public static String databaseConn="Database connection";
 }
