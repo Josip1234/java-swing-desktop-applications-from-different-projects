@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
@@ -16,9 +17,17 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+
+
+import entities.DatabaseConnection;
 import entities.DatabaseMessages;
+import entities.File;
+import entities.FileMessages;
 import entities.GeneralMessages;
+import implementations.FileImplementation;
 import implementations.GeneralFunctions;
+
+
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -155,16 +164,59 @@ public class DatabaseConnectionCnfg extends JFrame {
 		
 		DatabaseOptions.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-			    lblNewLabel.setText(DatabaseMessages.databaseConn);
-				btnNewButton.setVisible(true);
-				databasePassword.setVisible(true);
-				databaseUser.setVisible(true);
-				databaseUrl.setVisible(true);
-				driverName.setVisible(true);
-				LabelForDbUserPass.setVisible(true);
-				LabelForDbUser.setVisible(true);
-				LabelForDbURL.setVisible(true);
-				LabelForDriver.setVisible(true);
+		        lblNewLabel.setText(DatabaseMessages.databaseConn);
+		    				btnNewButton.setVisible(true);
+		    				databasePassword.setVisible(true);
+		    				databaseUser.setVisible(true);
+		    				databaseUrl.setVisible(true);
+		    				driverName.setVisible(true);
+		    				LabelForDbUserPass.setVisible(true);
+		    				LabelForDbUser.setVisible(true);
+		    				LabelForDbURL.setVisible(true);
+		    				LabelForDriver.setVisible(true);
+		    				
+		    	DatabaseConnection connection = new DatabaseConnection();
+		    	File file = new File();
+		    	FileImplementation fileImplementation = new FileImplementation();
+		    	if(fileImplementation.checkIfFileExists(file)==true) {
+		    		System.out.println(FileMessages.readingFromFile);
+		    		
+		    		String value=fileImplementation.readFromAFile(file);
+		    	    String element=value;
+		            element=fileImplementation.parse(element, "JDBC_DRIVER");
+		            connection.setJDBC_DRIVER(element);
+                    driverName.setText(connection.getJDBC_DRIVER());
+                    
+                    element=value;
+                    element=fileImplementation.parse(element, "DB_URL");
+                    connection.setDB_URL(element);
+                    databaseUrl.setText(connection.getDB_URL());
+                    
+                    
+                    element=value;
+                    element=fileImplementation.parse(element, "USER");
+                    connection.setUSER(element);
+                    databaseUser.setText(connection.getUSER());
+                    
+                    
+                    element=value;
+                    element=fileImplementation.parse(element, "PASS");
+                    connection.setPASS(element);
+                   databasePassword.setText(connection.getPASS());
+                    
+		    		System.out.println(FileMessages.finishedReading);
+		    	}else {
+		    		System.out.println(FileMessages.errorOpeningTheFiles);
+		    		System.out.println(FileMessages.fileNotFound);
+		    		System.out.println(FileMessages.creatingNewFile);
+		    		System.out.println(FileMessages.writingToAFile);
+		    		fileImplementation.writeToAFile(file, connection);
+		    		System.out.println(FileMessages.fileCreated);
+		    	}
+		    	
+		    	
+		    	
+			
  			}
 		});
 		

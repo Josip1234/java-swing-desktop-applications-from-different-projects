@@ -61,4 +61,73 @@ public class FileImplementation implements FileOperations {
 		return exists;
 	}
 
+	@Override
+	public String parse(String element, String wordToParse) {
+		String parsed="";
+		if(wordToParse.contentEquals("JDBC_DRIVER")) {
+		    parsed=element;
+	       parsed=parsed.replace('{', ' ');
+	       parsed=parsed.replace('"', ' ');
+	       parsed=parsed.replace(':', ' ');
+	       parsed=parsed.replace(',', ' ');
+	       parsed=parsed.replace('}', ' ');
+	       parsed=parsed.trim();
+	       parsed=parsed.replaceAll("DatabaseConnection    ", "");
+	       parsed=parsed.replaceAll("DB_URL.*", "");
+	       parsed=parsed.replaceAll("JDBC_DRIVER", "");
+	       parsed=parsed.trim();
+		
+		}else if(wordToParse.contentEquals("DB_URL")) {
+		    parsed=element;
+		       parsed=parsed.replace('{', ' ');
+		       parsed=parsed.replace('"', ' ');
+		       parsed=parsed.replace('}', ' ');
+		       parsed=parsed.trim();
+		       parsed=parsed.replaceAll("DatabaseConnection    ", "");
+		       parsed=parsed.replaceFirst(".*DB_URL", "");
+		       parsed=parsed.trim();
+		       parsed=parsed.replaceFirst(":", "");
+		       parsed=parsed.replaceFirst(" ,", "");
+		       parsed=parsed.replaceAll("USER.*", "");
+		       parsed=parsed.trim();
+			    
+		}else if(wordToParse.contentEquals("USER")) {
+		    parsed=element;
+		       parsed=parsed.replace('{', ' ');
+		       parsed=parsed.replace('"', ' ');
+		       parsed=parsed.replace(':', ' ');
+		       parsed=parsed.replace(',', ' ');
+		       parsed=parsed.replace('}', ' ');
+		       parsed=parsed.trim();
+		       parsed=parsed.replaceAll("DatabaseConnection    ", "");
+		       parsed=parsed.replaceAll(".*USER", "");
+		       parsed=parsed.trim();
+		       parsed=parsed.replaceAll("PASS.*", "");
+		       parsed=parsed.trim();
+		      
+		}else if(wordToParse.contentEquals("PASS")) {
+		    parsed=element;
+		       parsed=parsed.replace('{', ' ');
+		       parsed=parsed.replace('"', ' ');
+		       parsed=parsed.replace('}', ' ');
+		       parsed=parsed.trim();
+		       parsed=parsed.replaceAll("DatabaseConnection    ", "");
+		       parsed=parsed.replaceFirst(".*PASS", "");
+		       parsed=parsed.replaceFirst(":", "");
+		       parsed=parsed.trim();
+		       printString(parsed);
+			    
+		}else {
+			System.out.println(FileMessages.fieldNotExists);
+		}
+  
+		return parsed;
+	}
+
+	@Override
+	public void printString(String string) {
+		System.out.println(string);
+		
+	}
+
 }

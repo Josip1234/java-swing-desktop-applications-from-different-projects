@@ -1,2 +1,2 @@
-{"DatabaseConnection":{"JDBC_DRIVER":"", "DB_URL":"", "USER":"", "PASS":""}}
+{"DatabaseConnection":{"JDBC_DRIVER":"org.mariadb.jdbc.Driver", "DB_URL":"jdbc:mariadb://localhost/test", "USER":"root", "PASS":"joehagrohe:/:,'"}}
 
