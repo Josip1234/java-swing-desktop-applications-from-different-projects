@@ -143,7 +143,18 @@ public class DatabaseConnectionCnfg extends JFrame {
 		databasePassword.setVisible(false);
 		
 		JButton btnNewButton = new JButton("Update config");
-		btnNewButton.setActionCommand("Make Config");
+
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				File file = new File();
+				DatabaseConnection connection = new DatabaseConnection(driverName.getText(),databaseUrl.getText(),databaseUser.getText(),databasePassword.getText());
+		        FileImplementation fileImplementation = new FileImplementation();
+		        System.out.println(FileMessages.writingToAFile);
+		        fileImplementation.writeToAFile(file, connection);
+		        System.out.println(FileMessages.finishedWriting);
+			}
+		});
+		
 		btnNewButton.setVisible(false);
 		
 		

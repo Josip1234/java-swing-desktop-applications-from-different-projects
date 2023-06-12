@@ -9,4 +9,5 @@ public static String finishedReading="Finished reading from a file.";
 public static String creatingNewFile="Creating new file...";
 public static String fileCreated="New config file has been created.";
 public static String fieldNotExists="That field s not exists in file.";
+public static String finishedWriting="File has been updated.";
 }
