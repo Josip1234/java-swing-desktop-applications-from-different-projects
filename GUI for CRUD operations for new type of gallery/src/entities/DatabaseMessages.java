@@ -11,4 +11,7 @@ public static String databaseInsertWasSuccessfull="Data has been inserted";
 public static String driverNotRegistered="There is a problem with jdbc driver. Check config.";
 public static String driverRegistered="Driver is successfully registered.";
 public static String databaseConn="Database connection";
+public static String closingConnection="Closing database connection...";
+public static String conectionClosed="Closed database connection";
+public static String problemClosingConnection="There is a problem with closing database.";
 }

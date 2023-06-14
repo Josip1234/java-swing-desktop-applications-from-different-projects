@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -24,6 +25,7 @@ import entities.DatabaseMessages;
 import entities.File;
 import entities.FileMessages;
 import entities.GeneralMessages;
+import implementations.DatabaseImpl;
 import implementations.FileImplementation;
 import implementations.GeneralFunctions;
 
@@ -149,9 +151,10 @@ public class DatabaseConnectionCnfg extends JFrame {
 				File file = new File();
 				DatabaseConnection connection = new DatabaseConnection(driverName.getText(),databaseUrl.getText(),databaseUser.getText(),databasePassword.getText());
 		        FileImplementation fileImplementation = new FileImplementation();
-		        System.out.println(FileMessages.writingToAFile);
+
 		        fileImplementation.writeToAFile(file, connection);
-		        System.out.println(FileMessages.finishedWriting);
+
+		 
 			}
 		});
 		
