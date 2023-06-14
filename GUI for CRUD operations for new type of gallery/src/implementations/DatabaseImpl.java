@@ -86,35 +86,21 @@ public class DatabaseImpl implements DatabaseInterface {
 				GeneralFunctions.showMessages("Info",messages,  DatabaseMessages.conectionClosed);
 		
 			} catch (SQLException e) {
-				  JFrame frame = new JFrame("Error");
-           	   frame.setVisible(true);
-           	JOptionPane.showMessageDialog(frame,
-           		    DatabaseMessages.problemClosingConnection,
-           		    "Error",
-           		    JOptionPane.ERROR_MESSAGE);
+				DatabaseMessages messages = new DatabaseMessages();
+				GeneralFunctions.showMessages("Error",messages,  DatabaseMessages.problemClosingConnection);
 			}
            }
 		   if (statement != null) {
                try {
-            	   JFrame frame = new JFrame("Info");
-            	   frame.setVisible(true);
-            	   JOptionPane.showMessageDialog(frame,
-            			    DatabaseMessages.closingConnection);
-            	   frame.setVisible(false);
+            		DatabaseMessages messages = new DatabaseMessages();
+            		GeneralFunctions.showMessages("Info",messages,  DatabaseMessages.closingConnection);
 				con.close();
-				   frame = new JFrame("Info");
-            	   frame.setVisible(true);
-            	   JOptionPane.showMessageDialog(frame,
-            			    DatabaseMessages.conectionClosed);
-            	   frame.setVisible(false);
+				messages = new DatabaseMessages();
+				GeneralFunctions.showMessages("Info",messages,  DatabaseMessages.conectionClosed);
 			
 			} catch (SQLException e) {
-				  JFrame frame = new JFrame("Error");
-	           	   frame.setVisible(true);
-	           	JOptionPane.showMessageDialog(frame,
-	           		    DatabaseMessages.problemClosingConnection,
-	           		    "Error",
-	           		    JOptionPane.ERROR_MESSAGE);
+				DatabaseMessages messages = new DatabaseMessages();
+				GeneralFunctions.showMessages("Error",messages,  DatabaseMessages.problemClosingConnection);
 				e.printStackTrace();
 			}
            }

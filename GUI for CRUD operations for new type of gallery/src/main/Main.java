@@ -8,6 +8,7 @@ import java.sql.Statement;
 import entities.DatabaseConnection;
 import entities.DatabaseMessages;
 import entities.File;
+import entities.FileMessages;
 import implementations.DatabaseImpl;
 import implementations.FileImplementation;
 import implementations.GeneralFunctions;
@@ -35,8 +36,8 @@ public class Main {
 	        //second use
 	      
 	        //third use
-		DatabaseMessages messages = new DatabaseMessages();
-		GeneralFunctions.showMessages("Info",messages,  DatabaseMessages.conectionClosed);
+		FileMessages messages = new FileMessages();
+		GeneralFunctions.showMessages("Error",messages,  FileMessages.fieldNotExists);
 	}
 
 }

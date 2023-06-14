@@ -27,27 +27,16 @@ public class FileImplementation implements FileOperations {
 		PrintWriter outPrintWriter = null;
 		try {
 			outPrintWriter=new PrintWriter(new FileOutputStream(file.getFilename()));
-			JFrame frame = new JFrame("Info");
-			frame.setVisible(true);
-			JOptionPane.showMessageDialog(frame,
-				    FileMessages.writingToAFile);
-			frame.setVisible(false);
+			FileMessages messages = new FileMessages();
+			GeneralFunctions.showMessages("Info",messages,   FileMessages.writingToAFile);
 			outPrintWriter.println(connection.toString());
-			frame = new JFrame("Info");
-			frame.setVisible(true);
-			JOptionPane.showMessageDialog(frame,
-				    FileMessages.finishedWriting);
-			frame.setVisible(false);
+			messages = new FileMessages();
+			GeneralFunctions.showMessages("Info",messages,   FileMessages.finishedWriting);
 			outPrintWriter.close();
 			
 		} catch (FileNotFoundException e) {
-			   JFrame frame = new JFrame("Error");
-			   frame.setVisible(true);
-			JOptionPane.showMessageDialog(frame,
-					FileMessages.errorOpeningTheFiles,
-				    "Error",
-				    JOptionPane.ERROR_MESSAGE);
-			   frame.setVisible(false);
+			FileMessages messages = new FileMessages();
+			GeneralFunctions.showMessages("Error",messages,  FileMessages.errorOpeningTheFiles);
 		
 			done=false;
 			e.printStackTrace();
@@ -61,26 +50,15 @@ public class FileImplementation implements FileOperations {
 		Scanner input = null;
 		try {
 			input=new Scanner(new FileInputStream(file.getFilename()));
-			JFrame frame = new JFrame("Info");
-			frame.setVisible(true);
-			JOptionPane.showMessageDialog(frame,
-				    FileMessages.readingFromFile);
-			frame.setVisible(false);
+			FileMessages messages = new FileMessages();
+			GeneralFunctions.showMessages("Info",messages,   FileMessages.readingFromFile);
 			value = input.nextLine();
-			frame = new JFrame("Info");
-			frame.setVisible(true);
-			JOptionPane.showMessageDialog(frame,
-				    FileMessages.finishedReading);
-			frame.setVisible(false);
+			messages = new FileMessages();
+			GeneralFunctions.showMessages("Info",messages,  FileMessages.finishedReading);
 		
 		} catch (FileNotFoundException e) {
-			   JFrame frame = new JFrame("Error");
-			   frame.setVisible(true);
-			JOptionPane.showMessageDialog(frame,
-					FileMessages.fileNotFound,
-				    "Error",
-				    JOptionPane.ERROR_MESSAGE);
-			   frame.setVisible(false);
+			FileMessages messages = new FileMessages();
+			GeneralFunctions.showMessages("Error",messages,  FileMessages.fileNotFound);
 		
 			
 			value="";
@@ -157,13 +135,8 @@ public class FileImplementation implements FileOperations {
 		       printString(parsed);
 			    
 		}else {
-			   JFrame frame = new JFrame("Error");
-			   frame.setVisible(true);
-			JOptionPane.showMessageDialog(frame,
-					FileMessages.fieldNotExists,
-				    "Error",
-				    JOptionPane.ERROR_MESSAGE);
-			   frame.setVisible(false);
+			FileMessages messages = new FileMessages();
+			GeneralFunctions.showMessages("Error",messages,  FileMessages.fieldNotExists);
 		
 		}
   

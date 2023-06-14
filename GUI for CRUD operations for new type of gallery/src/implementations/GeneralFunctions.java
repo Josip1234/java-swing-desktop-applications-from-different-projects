@@ -54,6 +54,28 @@ public class GeneralFunctions {
 				        showDialog(frame, DatabaseMessages.conectionClosed);
 				 	   setVisible(frame, false);
 				}
+			}else if(object instanceof FileMessages) {
+				if(message.contentEquals(FileMessages.writingToAFile)) {
+					  JFrame frame = createJFrame(name);
+				        setVisible(frame, true);
+				        showDialog(frame, FileMessages.writingToAFile);
+				 	   setVisible(frame, false);
+				}else if(message.contentEquals(FileMessages.finishedWriting)) {
+					  JFrame frame = createJFrame(name);
+				        setVisible(frame, true);
+				        showDialog(frame, FileMessages.finishedWriting);
+				 	   setVisible(frame, false);
+				}else if(message.contentEquals(FileMessages.readingFromFile)) {
+					  JFrame frame = createJFrame(name);
+				        setVisible(frame, true);
+				        showDialog(frame, FileMessages.readingFromFile);
+				 	   setVisible(frame, false);
+				}else if(message.contentEquals(FileMessages.finishedReading)) {
+					  JFrame frame = createJFrame(name);
+				        setVisible(frame, true);
+				        showDialog(frame, FileMessages.finishedReading);
+				 	   setVisible(frame, false);
+				}
 			}
 		}else if(name.contentEquals("Error")) {
 			if(object instanceof DatabaseMessages) {
@@ -67,89 +89,32 @@ public class GeneralFunctions {
 					   setVisible(frame, true);
 					   showErrorDialog(frame, DatabaseMessages.failedToConnectToDatabase);
 					   setVisible(frame, false);
+				}else if(message.contentEquals(DatabaseMessages.problemClosingConnection)) {
+					  JFrame frame = createJFrame(name);
+					   setVisible(frame, true);
+					   showErrorDialog(frame, DatabaseMessages.problemClosingConnection);
+					   setVisible(frame, false);
+				}
+			}else if(object instanceof FileMessages) {
+				if(message.contentEquals( FileMessages.errorOpeningTheFiles)) {
+					  JFrame frame = createJFrame(name);
+					   setVisible(frame, true);
+					   showErrorDialog(frame, FileMessages.errorOpeningTheFiles);
+					   setVisible(frame, false);
+				}else if(message.contentEquals(FileMessages.fileNotFound)) {
+					  JFrame frame = createJFrame(name);
+					   setVisible(frame, true);
+					   showErrorDialog(frame, FileMessages.fileNotFound);
+					   setVisible(frame, false);
+				}else if(message.contains(FileMessages.fieldNotExists)) {
+					  JFrame frame = createJFrame(name);
+					   setVisible(frame, true);
+					   showErrorDialog(frame, FileMessages.fieldNotExists);
+					   setVisible(frame, false);
 				}
 			}
 		}
 	   
-	 	   
-	 /*	   
-    	   
-    	   
-    	   JFrame frame = new JFrame("Error");
-       	   frame.setVisible(true);
-       	JOptionPane.showMessageDialog(frame,
-       		    DatabaseMessages.problemClosingConnection,
-       		    "Error",
-       		    JOptionPane.ERROR_MESSAGE);
-       	
-        JFrame frame = new JFrame("Info");
- 	   frame.setVisible(true);
- 	   JOptionPane.showMessageDialog(frame,
- 			    DatabaseMessages.closingConnection);
- 	   frame.setVisible(false);
- 	   
- 	   frame = new JFrame("Info");
-	   frame.setVisible(true);
-	   JOptionPane.showMessageDialog(frame,
-			    DatabaseMessages.conectionClosed);
-	   frame.setVisible(false);
-	   
-	   JFrame frame = new JFrame("Error");
-   	   frame.setVisible(true);
-   	JOptionPane.showMessageDialog(frame,
-   		    DatabaseMessages.problemClosingConnection,
-   		    "Error",
-   		    JOptionPane.ERROR_MESSAGE);
-   	
-	JFrame frame = new JFrame("Info");
-	frame.setVisible(true);
-	JOptionPane.showMessageDialog(frame,
-		    FileMessages.writingToAFile);
-	frame.setVisible(false);
-	
-	frame = new JFrame("Info");
-	frame.setVisible(true);
-	JOptionPane.showMessageDialog(frame,
-		    FileMessages.finishedWriting);
-	frame.setVisible(false);
-	
-	 JFrame frame = new JFrame("Error");
-	   frame.setVisible(true);
-	JOptionPane.showMessageDialog(frame,
-			FileMessages.errorOpeningTheFiles,
-		    "Error",
-		    JOptionPane.ERROR_MESSAGE);
-	   frame.setVisible(false);
-	   
-		JFrame frame = new JFrame("Info");
-		frame.setVisible(true);
-		JOptionPane.showMessageDialog(frame,
-			    FileMessages.readingFromFile);
-		frame.setVisible(false);
-		
-		
-		frame = new JFrame("Info");
-		frame.setVisible(true);
-		JOptionPane.showMessageDialog(frame,
-			    FileMessages.finishedReading);
-		frame.setVisible(false);
-		
-		  JFrame frame = new JFrame("Error");
-		   frame.setVisible(true);
-		JOptionPane.showMessageDialog(frame,
-				FileMessages.fileNotFound,
-			    "Error",
-			    JOptionPane.ERROR_MESSAGE);
-		   frame.setVisible(false);
-		   
-		   JFrame frame = new JFrame("Error");
-		   frame.setVisible(true);
-		JOptionPane.showMessageDialog(frame,
-				FileMessages.fieldNotExists,
-			    "Error",
-			    JOptionPane.ERROR_MESSAGE);
-		   frame.setVisible(false);
-		   */
 	
 	}
 	
