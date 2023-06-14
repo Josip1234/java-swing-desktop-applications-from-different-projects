@@ -25,20 +25,11 @@ public class DatabaseImpl implements DatabaseInterface {
         System.out.println(DatabaseMessages.connecting);
         try {
 			Class.forName(connection.getJDBC_DRIVER());
-	        JFrame frame = new JFrame("Info");
-	        frame.setVisible(true);
-	        JOptionPane.showMessageDialog(frame,
-	        		DatabaseMessages.driverRegistered);
-	 	   frame.setVisible(false);
-		
+			DatabaseMessages messages = new DatabaseMessages();
+			GeneralFunctions.showMessages("Info",messages, DatabaseMessages.driverRegistered);
 		} catch (ClassNotFoundException e) {
-			   JFrame frame = new JFrame("Error");
-			   frame.setVisible(true);
-			JOptionPane.showMessageDialog(frame,
-					DatabaseMessages.driverNotRegistered,
-				    "Error",
-				    JOptionPane.ERROR_MESSAGE);
-			   frame.setVisible(false);
+			DatabaseMessages messages = new DatabaseMessages();
+			GeneralFunctions.showMessages("Error",messages, DatabaseMessages.driverNotRegistered);
 			e.printStackTrace();
 		}
 
@@ -47,19 +38,11 @@ public class DatabaseImpl implements DatabaseInterface {
         try {
 			conn = DriverManager.getConnection(
 			        connection.getDB_URL(), connection.getUSER(), connection.getPASS());
-	        JFrame frame = new JFrame("Info");
-	        frame.setVisible(true);
-	        JOptionPane.showMessageDialog(frame,
-	        		DatabaseMessages.databaseIsConnected);
-	 	   frame.setVisible(false);
+			DatabaseMessages messages = new DatabaseMessages();
+			GeneralFunctions.showMessages("Info",messages, DatabaseMessages.databaseIsConnected);
 		} catch (SQLException e) {
-			  JFrame frame = new JFrame("Error");
-			   frame.setVisible(true);
-			JOptionPane.showMessageDialog(frame,
-					DatabaseMessages.failedToConnectToDatabase,
-				    "Error",
-				    JOptionPane.ERROR_MESSAGE);
-			   frame.setVisible(false);
+			DatabaseMessages messages = new DatabaseMessages();
+			GeneralFunctions.showMessages("Error",messages, DatabaseMessages.failedToConnectToDatabase);
 			e.printStackTrace();
 		}
     
@@ -96,17 +79,11 @@ public class DatabaseImpl implements DatabaseInterface {
 	
 		   if (statement != null) {
                try {
-            	   JFrame frame = new JFrame("Info");
-            	   frame.setVisible(true);
-            	   JOptionPane.showMessageDialog(frame,
-            			    DatabaseMessages.closingConnection);
-            	   frame.setVisible(false);
+           		DatabaseMessages messages = new DatabaseMessages();
+        		GeneralFunctions.showMessages("Info",messages, DatabaseMessages.closingConnection);
 				con.close();
-				   frame = new JFrame("Info");
-            	   frame.setVisible(true);
-            	   JOptionPane.showMessageDialog(frame,
-            			    DatabaseMessages.conectionClosed);
-            	   frame.setVisible(false);
+				messages = new DatabaseMessages();
+				GeneralFunctions.showMessages("Info",messages,  DatabaseMessages.conectionClosed);
 		
 			} catch (SQLException e) {
 				  JFrame frame = new JFrame("Error");

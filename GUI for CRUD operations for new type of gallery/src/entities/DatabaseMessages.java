@@ -14,4 +14,9 @@ public static String databaseConn="Database connection";
 public static String closingConnection="Closing database connection...";
 public static String conectionClosed="Closed database connection";
 public static String problemClosingConnection="There is a problem with closing database.";
+public DatabaseMessages() {
+
+}
+
+
 }
