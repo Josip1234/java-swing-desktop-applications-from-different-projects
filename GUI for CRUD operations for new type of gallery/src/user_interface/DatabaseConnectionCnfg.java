@@ -96,6 +96,10 @@ public class DatabaseConnectionCnfg extends JFrame {
 
 	
 		Db.add(DatabaseOptions);
+		
+		JMenuItem ChooseTable = new JMenuItem("Choose Table");
+	
+		Db.add(ChooseTable);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -159,6 +163,23 @@ public class DatabaseConnectionCnfg extends JFrame {
 		});
 		
 		btnNewButton.setVisible(false);
+		
+		
+		ChooseTable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			    lblNewLabel.setText(GeneralMessages.chooseTables);
+				lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
+						btnNewButton.setVisible(false);
+						databasePassword.setVisible(false);
+						databaseUser.setVisible(false);
+						databaseUrl.setVisible(false);
+						driverName.setVisible(false);
+						LabelForDbUserPass.setVisible(false);
+						LabelForDbUser.setVisible(false);
+						LabelForDbURL.setVisible(false);
+						LabelForDriver.setVisible(false);
+			}
+		});
 		
 		
 		ReturnToIndex.addActionListener(new ActionListener() {

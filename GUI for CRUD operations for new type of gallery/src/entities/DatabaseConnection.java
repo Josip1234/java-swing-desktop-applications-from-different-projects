@@ -11,9 +11,9 @@ private String USER;
 private String PASS;
 
 public DatabaseConnection() {
-	this.JDBC_DRIVER = "";
-	this.DB_URL = "";
-	this.USER = "";
+	this.JDBC_DRIVER = "org.mariadb.jdbc.Driver";
+	this.DB_URL = "jdbc:mariadb://localhost/test";
+	this.USER = "root";
 	this.PASS = "";
 }
 
