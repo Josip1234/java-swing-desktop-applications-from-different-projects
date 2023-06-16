@@ -2,17 +2,23 @@ package implementations;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import entities.DatabaseConnection;
 import entities.DatabaseMessages;
+import entities.DbQuery;
+import entities.Tables;
 import interfaces.DatabaseInterface;
+import interfaces.SelectQuery;
 
-public class DatabaseImpl implements DatabaseInterface {
+public class DatabaseImpl implements DatabaseInterface,SelectQuery  {
 	
 
 	public DatabaseImpl() {
@@ -106,5 +112,30 @@ public class DatabaseImpl implements DatabaseInterface {
            }
 		return con;
 	}
+
+	@Override
+	public List<Object> returnList(Statement statement, DbQuery dbQuery) throws SQLException {
+		List<Object> list = new ArrayList<Object>();
+	    ResultSet rs= statement.executeQuery(dbQuery.getQuery());
+	    while(rs.next()) {
+	    	System.out.println(rs.getString(1));
+	    	list.add(rs.getString(1));
+	    }
+		return list;
+	}
+
+	@Override
+	public List<Tables> returnListOfTables(DatabaseConnection con, DatabaseImpl databaseImpl, Statement stm,
+			Connection connection, DbQuery dbQuery) throws SQLException {
+		  List<Object> list = new ArrayList<Object>();
+		   List<Tables> tables = new ArrayList<Tables>();
+			list=databaseImpl.returnList(stm, dbQuery);
+			for (Object object : list) {
+				tables.add(new Tables(object.toString()));
+			}
+			return tables;
+	}
+
+
 
 }

@@ -35,82 +35,82 @@ public class GeneralFunctions {
 			if(object instanceof DatabaseMessages) {
 				if(message.contentEquals(DatabaseMessages.driverRegistered)) {
 					  JFrame frame = createJFrame(name);
-				        setVisible(frame, true);
+				      
 				        showDialog(frame, DatabaseMessages.driverRegistered);
-				 	   setVisible(frame, false);
+				 	   
 				}else if(message.contentEquals(DatabaseMessages.databaseIsConnected)) {
 					  JFrame frame = createJFrame(name);
-				        setVisible(frame, true);
+				      
 				        showDialog(frame, DatabaseMessages.databaseIsConnected);
-				 	   setVisible(frame, false);
+				 	   
 				}else if(message.contentEquals(DatabaseMessages.closingConnection)) {
 					  JFrame frame = createJFrame(name);
-				        setVisible(frame, true);
+				      
 				        showDialog(frame, DatabaseMessages.closingConnection);
-				 	   setVisible(frame, false);
+				 	   
 				}else if(message.contentEquals(DatabaseMessages.conectionClosed)) {
 					  JFrame frame = createJFrame(name);
-				        setVisible(frame, true);
+				      
 				        showDialog(frame, DatabaseMessages.conectionClosed);
-				 	   setVisible(frame, false);
+				 	   
 				}
 			}else if(object instanceof FileMessages) {
 				if(message.contentEquals(FileMessages.writingToAFile)) {
 					  JFrame frame = createJFrame(name);
-				        setVisible(frame, true);
+				      
 				        showDialog(frame, FileMessages.writingToAFile);
-				 	   setVisible(frame, false);
+				 	   
 				}else if(message.contentEquals(FileMessages.finishedWriting)) {
 					  JFrame frame = createJFrame(name);
-				        setVisible(frame, true);
+				      
 				        showDialog(frame, FileMessages.finishedWriting);
-				 	   setVisible(frame, false);
+				 	   
 				}else if(message.contentEquals(FileMessages.readingFromFile)) {
 					  JFrame frame = createJFrame(name);
-				        setVisible(frame, true);
+				      
 				        showDialog(frame, FileMessages.readingFromFile);
-				 	   setVisible(frame, false);
+				 	   
 				}else if(message.contentEquals(FileMessages.finishedReading)) {
 					  JFrame frame = createJFrame(name);
-				        setVisible(frame, true);
+				      
 				        showDialog(frame, FileMessages.finishedReading);
-				 	   setVisible(frame, false);
+				 	   
 				}
 			}
 		}else if(name.contentEquals("Error")) {
 			if(object instanceof DatabaseMessages) {
 				if(message.contentEquals(DatabaseMessages.driverNotRegistered)) {
 					  JFrame frame = createJFrame(name);
-					   setVisible(frame, true);
+					 
 					   showErrorDialog(frame, DatabaseMessages.driverNotRegistered);
-					   setVisible(frame, false);
+					   
 				}else if(message.contentEquals(DatabaseMessages.failedToConnectToDatabase)) {
 					  JFrame frame = createJFrame(name);
-					   setVisible(frame, true);
+					 
 					   showErrorDialog(frame, DatabaseMessages.failedToConnectToDatabase);
-					   setVisible(frame, false);
+					   
 				}else if(message.contentEquals(DatabaseMessages.problemClosingConnection)) {
 					  JFrame frame = createJFrame(name);
-					   setVisible(frame, true);
+					 
 					   showErrorDialog(frame, DatabaseMessages.problemClosingConnection);
-					   setVisible(frame, false);
+					   
 				}
 			}else if(object instanceof FileMessages) {
 				if(message.contentEquals( FileMessages.errorOpeningTheFiles)) {
 					  JFrame frame = createJFrame(name);
-					   setVisible(frame, true);
+					 
 					   showErrorDialog(frame, FileMessages.errorOpeningTheFiles);
-					   setVisible(frame, false);
+					   
 				}else if(message.contentEquals(FileMessages.fileNotFound)) {
 					  JFrame frame = createJFrame(name);
-					   setVisible(frame, true);
+					 
 					   showErrorDialog(frame, FileMessages.fileNotFound);
-					   setVisible(frame, false);
+					   
 				}else if(message.contains(FileMessages.fieldNotExists)) {
 					  JFrame frame = createJFrame(name);
-					   setVisible(frame, true);
+					 
 					   showErrorDialog(frame, FileMessages.fieldNotExists);
-					   setVisible(frame, false);
+					   
 				}
 			}
 		}
