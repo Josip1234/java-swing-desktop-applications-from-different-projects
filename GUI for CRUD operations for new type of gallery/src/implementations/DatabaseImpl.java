@@ -118,7 +118,7 @@ public class DatabaseImpl implements DatabaseInterface,SelectQuery  {
 		List<Object> list = new ArrayList<Object>();
 	    ResultSet rs= statement.executeQuery(dbQuery.getQuery());
 	    while(rs.next()) {
-	    	System.out.println(rs.getString(1));
+	    	
 	    	list.add(rs.getString(1));
 	    }
 		return list;
@@ -130,7 +130,9 @@ public class DatabaseImpl implements DatabaseInterface,SelectQuery  {
 		  List<Object> list = new ArrayList<Object>();
 		   List<Tables> tables = new ArrayList<Tables>();
 			list=databaseImpl.returnList(stm, dbQuery);
+			
 			for (Object object : list) {
+				//System.out.println("Object:"+object);
 				tables.add(new Tables(object.toString()));
 			}
 			return tables;

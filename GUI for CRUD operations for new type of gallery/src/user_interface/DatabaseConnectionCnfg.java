@@ -4,10 +4,15 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -17,14 +22,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
-
+import javax.swing.plaf.IconUIResource;
 
 import entities.DatabaseConnection;
 import entities.DatabaseMessages;
+import entities.DbQuery;
 import entities.File;
 import entities.FileMessages;
 import entities.GeneralMessages;
+import entities.Tables;
 import implementations.DatabaseImpl;
 import implementations.FileImplementation;
 import implementations.GeneralFunctions;
@@ -167,6 +173,7 @@ public class DatabaseConnectionCnfg extends JFrame {
 		
 		ChooseTable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JFrame frame = new JFrame("Choose tables");
 			    lblNewLabel.setText(GeneralMessages.chooseTables);
 				lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
 						btnNewButton.setVisible(false);
@@ -178,6 +185,36 @@ public class DatabaseConnectionCnfg extends JFrame {
 						LabelForDbUser.setVisible(false);
 						LabelForDbURL.setVisible(false);
 						LabelForDriver.setVisible(false);
+						DatabaseConnection con = new DatabaseConnection();
+						DatabaseImpl databaseImpl = new DatabaseImpl();
+					
+						try {
+							
+					
+							DbQuery dbQuery = new DbQuery("Show tables");
+							
+							FileImplementation fileImplementation = new FileImplementation();
+							File file = new File();
+							String valueToParse=fileImplementation.readFromAFile(file);
+							con.setDB_URL(fileImplementation.parse(valueToParse, "DB_URL"));
+							
+				            Statement statement=null;
+					        Connection connection=null;
+							
+							List<Tables> list=GeneralFunctions.getListOfTables(fileImplementation, file, connection, statement, con, databaseImpl, dbQuery);
+							
+						    Object[] possib= {};
+						    possib=list.toArray();
+						    Tables table=(Tables)JOptionPane.showInputDialog(frame,"Choose table:","",JOptionPane.INFORMATION_MESSAGE,null,possib,"Select");
+						    System.out.println(table);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+						
+						
+						
 			}
 		});
 		

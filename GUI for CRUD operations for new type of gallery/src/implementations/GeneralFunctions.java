@@ -1,12 +1,20 @@
 package implementations;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import entities.DatabaseConnection;
 import entities.DatabaseMessages;
+import entities.DbQuery;
 import entities.File;
 import entities.FileMessages;
+import entities.Tables;
 
 public class GeneralFunctions {
    
@@ -17,9 +25,9 @@ public class GeneralFunctions {
 	    FileImplementation fileImplementation = new FileImplementation();
 	    doesFileExists=fileImplementation.checkIfFileExists(file);
 	    if(doesFileExists==true) {
-	    	System.out.println(FileMessages.readingFromFile);
+	    	//System.out.println(FileMessages.readingFromFile);
 	    	String value=fileImplementation.readFromAFile(file);
-	        System.out.println(value);
+	        //System.out.println(value);
 	    	//stavi u text field
 	    
 	    }else {
@@ -140,5 +148,20 @@ public class GeneralFunctions {
 				message,
 			    "Error",
 			    JOptionPane.ERROR_MESSAGE);
+	}
+	public static List<Tables> getListOfTables(FileImplementation fileImplementation, File file, Connection connection, Statement statement, DatabaseConnection con, DatabaseImpl databaseImpl, DbQuery dbQuery) throws SQLException{
+		List<Tables> tables = new ArrayList<Tables>();
+
+		String valueToParse=fileImplementation.readFromAFile(file);
+
+		con.setDB_URL(fileImplementation.parse(valueToParse, "DB_URL"));
+		
+   
+		connection = databaseImpl.openConnection(con, null, statement);
+		statement=connection.createStatement();
+		List<Tables> list=databaseImpl.returnListOfTables(con, databaseImpl, statement, connection, dbQuery);
+		connection=databaseImpl.closeConnection(statement, connection);
+		tables=list;
+		return tables;
 	}
 }
