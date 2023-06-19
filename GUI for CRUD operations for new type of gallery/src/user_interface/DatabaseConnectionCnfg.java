@@ -197,6 +197,9 @@ public class DatabaseConnectionCnfg extends JFrame {
 							File file = new File();
 							String valueToParse=fileImplementation.readFromAFile(file);
 							con.setDB_URL(fileImplementation.parse(valueToParse, "DB_URL"));
+							con.setJDBC_DRIVER(fileImplementation.parse(valueToParse, "JDBC_DRIVER"));
+							con.setUSER(fileImplementation.parse(valueToParse, "USER"));
+							con.setPASS(fileImplementation.parse(valueToParse, "PASS"));
 							
 				            Statement statement=null;
 					        Connection connection=null;

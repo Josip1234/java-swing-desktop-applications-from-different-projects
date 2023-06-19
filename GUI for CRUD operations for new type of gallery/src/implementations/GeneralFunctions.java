@@ -14,6 +14,7 @@ import entities.DatabaseMessages;
 import entities.DbQuery;
 import entities.File;
 import entities.FileMessages;
+import entities.GeneralMessages;
 import entities.Tables;
 
 public class GeneralFunctions {
@@ -119,6 +120,12 @@ public class GeneralFunctions {
 					 
 					   showErrorDialog(frame, FileMessages.fieldNotExists);
 					   
+				}
+			}else if(object instanceof GeneralMessages) {
+				if(message.contentEquals(GeneralMessages.closingApplication)) {
+					 JFrame frame = createJFrame(name);
+					 
+					   showErrorDialog(frame, GeneralMessages.closingApplication);
 				}
 			}
 		}

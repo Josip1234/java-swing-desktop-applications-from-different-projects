@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import entities.DatabaseConnection;
 import entities.DatabaseMessages;
 import entities.DbQuery;
+import entities.GeneralMessages;
 import entities.Tables;
 import interfaces.DatabaseInterface;
 import interfaces.SelectQuery;
@@ -35,8 +36,11 @@ public class DatabaseImpl implements DatabaseInterface,SelectQuery  {
 			GeneralFunctions.showMessages("Info",messages, DatabaseMessages.driverRegistered);
 		} catch (ClassNotFoundException e) {
 			DatabaseMessages messages = new DatabaseMessages();
+			GeneralMessages generalMessages=new GeneralMessages();
 			GeneralFunctions.showMessages("Error",messages, DatabaseMessages.driverNotRegistered);
-			e.printStackTrace();
+			GeneralFunctions.showMessages("Error", generalMessages, GeneralMessages.closingApplication);
+			//exit the app if driver is not registered
+			System.exit(0);
 		}
 
       
