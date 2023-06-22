@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import entities.Columns;
 import entities.DatabaseConnection;
 import entities.DatabaseMessages;
 import entities.DbQuery;
@@ -28,8 +29,8 @@ public class DatabaseImpl implements DatabaseInterface,SelectQuery  {
 
 	@Override
 	public Connection openConnection(DatabaseConnection connection, Connection conn, Statement stmt) {
-	
-        System.out.println(DatabaseMessages.connecting);
+		DatabaseMessages message = new DatabaseMessages();
+        GeneralFunctions.showMessages("Info", message, DatabaseMessages.connecting);
         try {
 			Class.forName(connection.getJDBC_DRIVER());
 			DatabaseMessages messages = new DatabaseMessages();
@@ -140,6 +141,37 @@ public class DatabaseImpl implements DatabaseInterface,SelectQuery  {
 				tables.add(new Tables(object.toString()));
 			}
 			return tables;
+	}
+
+	@Override
+	public List<Columns> readColumnsFromTable(DatabaseConnection connection, Connection conn, Statement stmt,Tables tables, DatabaseImpl databaseImpl) {
+			DbQuery dbQuery = new DbQuery("select * from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='"+tables.getTableName()+"'");
+			conn = databaseImpl.openConnection(connection, conn, stmt);
+			List<Columns> col = new ArrayList<Columns>();
+			try {
+				stmt=conn.createStatement();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			ResultSet resultSet;
+			try {
+				
+				resultSet=stmt.executeQuery(dbQuery.getQuery());
+				while(resultSet.next()) {
+					Columns columns = new Columns();
+					columns.setTableName(resultSet.getString("TABLE_NAME"));
+					columns.setColumnName(resultSet.getString("COLUMN_NAME"));
+					columns.setColumnType(resultSet.getString("DATA_TYPE"));
+				    col.add(columns);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			conn=databaseImpl.closeConnection(stmt, conn);
+		  
+		return col;
 	}
 
 

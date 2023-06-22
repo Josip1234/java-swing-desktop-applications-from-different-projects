@@ -62,6 +62,10 @@ public class GeneralFunctions {
 				      
 				        showDialog(frame, DatabaseMessages.conectionClosed);
 				 	   
+				}else if(message.contentEquals(DatabaseMessages.connecting)){
+					 JFrame frame = createJFrame(name);
+				      
+				        showDialog(frame, DatabaseMessages.connecting);
 				}
 			}else if(object instanceof FileMessages) {
 				if(message.contentEquals(FileMessages.writingToAFile)) {

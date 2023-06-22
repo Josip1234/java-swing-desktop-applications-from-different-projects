@@ -7,12 +7,12 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -20,10 +20,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.IconUIResource;
 
+import entities.Columns;
 import entities.DatabaseConnection;
 import entities.DatabaseMessages;
 import entities.DbQuery;
@@ -34,11 +36,6 @@ import entities.Tables;
 import implementations.DatabaseImpl;
 import implementations.FileImplementation;
 import implementations.GeneralFunctions;
-
-
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 
 public class DatabaseConnectionCnfg extends JFrame {
 
@@ -201,15 +198,21 @@ public class DatabaseConnectionCnfg extends JFrame {
 							con.setUSER(fileImplementation.parse(valueToParse, "USER"));
 							con.setPASS(fileImplementation.parse(valueToParse, "PASS"));
 							
-				            Statement statement=null;
+				            
 					        Connection connection=null;
-							
+					        Statement statement=null;
+					        
 							List<Tables> list=GeneralFunctions.getListOfTables(fileImplementation, file, connection, statement, con, databaseImpl, dbQuery);
 							
 						    Object[] possib= {};
 						    possib=list.toArray();
 						    Tables table=(Tables)JOptionPane.showInputDialog(frame,"Choose table:","",JOptionPane.INFORMATION_MESSAGE,null,possib,"Select");
-						    System.out.println(table);
+                           
+                            List<Columns> columns = new ArrayList<Columns>();
+                            columns=databaseImpl.readColumnsFromTable(con, connection, statement, table, databaseImpl);
+                            for (Columns columns2 : columns) {
+								System.out.println(columns2);
+							}
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
