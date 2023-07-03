@@ -1,7 +1,9 @@
 package user_interface;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -13,6 +15,7 @@ import java.util.List;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -20,10 +23,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import entities.Columns;
 import entities.DatabaseConnection;
@@ -210,6 +216,11 @@ public class DatabaseConnectionCnfg extends JFrame {
                            
                             List<Columns> columns = new ArrayList<Columns>();
                             columns=databaseImpl.readColumnsFromTable(con, connection, statement, table, databaseImpl);
+                             
+                            JTable jTable = new JTable();
+                            showTableData(frame, columns, jTable);
+                      
+                            
                             for (Columns columns2 : columns) {
 								System.out.println(columns2);
 							}
@@ -363,4 +374,29 @@ public class DatabaseConnectionCnfg extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+    public void showTableData(JFrame frame1, List<Columns> columns, JTable table) {
+        frame1 = new JFrame("Database Search Result");
+        frame1.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frame1.setLayout(new BorderLayout());
+        DefaultTableModel model = new DefaultTableModel();
+        String colNames[] = {"Column name","Column type"};
+        
+        model.setColumnIdentifiers(colNames);
+        table = new JTable();
+        table.setModel(model);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        table.setFillsViewportHeight(true);
+        JScrollPane scroll = new JScrollPane(table);
+        scroll.setHorizontalScrollBarPolicy(
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroll.setVerticalScrollBarPolicy(
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        for (Columns column : columns) {
+			model.addRow(new Object[] {column.getColumnName(),column.getColumnType()});
+		}
+        
+        frame1.add(scroll);
+        frame1.setVisible(true);
+        frame1.setSize(400, 300);
+    }
 }
