@@ -109,6 +109,12 @@ public class DatabaseConnectionCnfg extends JFrame {
 		JMenuItem ChooseTable = new JMenuItem("Choose Table");
 	
 		Db.add(ChooseTable);
+		
+		JMenu Data = new JMenu("Data");
+		menuBar.add(Data);
+		
+		JMenuItem ReadData = new JMenuItem("Read data from table");
+		Data.add(ReadData);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -377,7 +383,7 @@ public class DatabaseConnectionCnfg extends JFrame {
     public void showTableData(JFrame frame1, List<Columns> columns, JTable table) {
         frame1 = new JFrame("Database Search Result");
         frame1.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        frame1.setLayout(new BorderLayout());
+        frame1.getContentPane().setLayout(new BorderLayout());
         DefaultTableModel model = new DefaultTableModel();
         String colNames[] = {"Column name","Column type"};
         
@@ -395,7 +401,7 @@ public class DatabaseConnectionCnfg extends JFrame {
 			model.addRow(new Object[] {column.getColumnName(),column.getColumnType()});
 		}
         
-        frame1.add(scroll);
+        frame1.getContentPane().add(scroll);
         frame1.setVisible(true);
         frame1.setSize(400, 300);
     }
