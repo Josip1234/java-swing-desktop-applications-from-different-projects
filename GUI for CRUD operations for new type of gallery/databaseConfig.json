@@ -1,2 +1,2 @@
-{"DatabaseConnection":{"JDBC_DRIVER":"org.mariadb.jdbc.Driver", "DB_URL":"jdbc:mariadb://localhost/jokes", "USER":"root", "PASS":""}}
+{"DatabaseConnection":{"JDBC_DRIVER":"org.mariadb.jdbc.Driver", "DB_URL":"jdbc:mariadb://localhost/dynamic_gallery", "USER":"root", "PASS":""}}
 

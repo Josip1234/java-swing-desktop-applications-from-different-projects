@@ -174,6 +174,29 @@ public class DatabaseImpl implements DatabaseInterface,SelectQuery  {
 		return col;
 	}
 
+	@Override
+	public List<String> returnAllDataFromTable(DatabaseConnection con, DatabaseImpl databaseImpl, Statement stm,
+			Connection connection, DbQuery dbQuery, Tables tables, List<Columns> columns) throws SQLException {
+		DbQuery query = new DbQuery("SELECT * FROM "+ tables.getTableName()+"");
+		connection=databaseImpl.openConnection(con, connection, stm);
+		List<String> data=new ArrayList<String>();
+		stm=connection.createStatement();
+		ResultSet resultSet;
+		resultSet=stm.executeQuery(query.getQuery());
+		
+		while(resultSet.next()) {
+		//fetch column names from list of columns
+			for (Columns column : columns) {
+				String columnName = new String();
+				columnName=column.getColumnName();
+				String temp=resultSet.getString(columnName);
+				data.add(temp);
+			}
+			
+		}
+		return data;
+	}
+
 
 
 }

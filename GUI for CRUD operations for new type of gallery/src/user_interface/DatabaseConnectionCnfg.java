@@ -117,7 +117,7 @@ public class DatabaseConnectionCnfg extends JFrame {
 		Data.add(ReadData);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+      
 		setContentPane(contentPane);
 		
 		JLabel lblNewLabel = new JLabel(GeneralMessages.welcome);
