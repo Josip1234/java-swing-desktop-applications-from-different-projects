@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.GroupLayout;
@@ -74,7 +75,7 @@ public class DatabaseConnectionCnfg extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DatabaseConnectionCnfg() {
+	public DatabaseConnectionCnfg() throws SQLException {
 		setResizable(false);
         GeneralFunctions.initApp();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -114,6 +115,7 @@ public class DatabaseConnectionCnfg extends JFrame {
 		menuBar.add(Data);
 		
 		JMenuItem ReadData = new JMenuItem("Read data from table");
+	
 		Data.add(ReadData);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -144,7 +146,7 @@ public class DatabaseConnectionCnfg extends JFrame {
 		LabelForDbUserPass.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		LabelForDbUserPass.setVisible(false);
 	
-		
+		ReadData.setVisible(false);
 	
 		
 		driverName = new JTextField();
@@ -225,7 +227,22 @@ public class DatabaseConnectionCnfg extends JFrame {
                              
                             JTable jTable = new JTable();
                             showTableData(frame, columns, jTable);
-                      
+                            ReadData.setVisible(true);
+                        	ReadData.addActionListener(new ActionListener(){
+                    			public void actionPerformed(ActionEvent e) {
+                    				 final List<Columns> columns;
+                                     columns=databaseImpl.readColumnsFromTable(con, connection, statement, table, databaseImpl);
+                    				   List<String> data;
+									try {
+										data = databaseImpl.returnAllDataFromTable(con, databaseImpl, statement, connection, dbQuery, table, columns);
+										 showDataFromTables(frame, columns, jTable,data);
+									} catch (SQLException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+                    	              
+                    			}
+                    		});
                             
                             for (Columns columns2 : columns) {
 								System.out.println(columns2);
@@ -250,6 +267,7 @@ public class DatabaseConnectionCnfg extends JFrame {
 				databaseUser.setVisible(false);
 				databaseUrl.setVisible(false);
 				driverName.setVisible(false);
+				ReadData.setVisible(false);
 				LabelForDbUserPass.setVisible(false);
 				LabelForDbUser.setVisible(false);
 				LabelForDbURL.setVisible(false);
@@ -405,4 +423,44 @@ public class DatabaseConnectionCnfg extends JFrame {
         frame1.setVisible(true);
         frame1.setSize(400, 300);
     }
+    
+    public void showDataFromTables(JFrame frame1, List<Columns> columns, JTable table, List<String> data) {
+        frame1 = new JFrame("Table data");
+        frame1.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frame1.getContentPane().setLayout(new BorderLayout());
+        DefaultTableModel model = new DefaultTableModel();
+        List<String> colNames=new ArrayList<String>();
+        
+      
+        for (Columns col : columns) {
+		  colNames.add(col.getColumnName());
+		}
+        
+        model.setColumnIdentifiers(colNames.toArray());
+        table = new JTable();
+        table.setModel(model);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        table.setFillsViewportHeight(true);
+        JScrollPane scroll = new JScrollPane(table);
+        scroll.setHorizontalScrollBarPolicy(
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroll.setVerticalScrollBarPolicy(
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        
+       
+        List<String> temp=data;
+        for(int i=0;i<columns.size();i++) {
+       
+        }
+        
+        for (Columns column : columns) {
+    			model.addRow(new Object[] {column.getColumnName(),column.getColumnType()});
+    		}
+        
+        frame1.getContentPane().add(scroll);
+        frame1.setVisible(true);
+        frame1.setSize(400, 300);
+    }
+    
+    
 }
