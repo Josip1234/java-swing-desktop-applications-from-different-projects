@@ -59,7 +59,7 @@ public class Main {
                List<Tables> tab=databaseImpl.returnListOfTables(con, databaseImpl, stmt, connection, dbQuery);
                //System.out.println(tab.toString());
                //System.out.println("Show table columns and data types");
-               Tables tables = new Tables("category");
+               Tables tables = new Tables("storage_system");
                List<Columns> columns = databaseImpl.readColumnsFromTable(con, connection, stmt, tables, databaseImpl);
                //System.out.println(columns.toString());
                //after table has been chosen, read all data from it
@@ -67,8 +67,12 @@ public class Main {
                //System.out.println(data.toString());
                Map<String,String> map = new HashMap<String,String>();
                
+               int index=0;
                for (String string : data) {
-				System.out.println(string);
+            	   index++;
+				   if(string.contentEquals("-")) {
+					   System.out.println(index);
+				   }
 			}
          
             
