@@ -65,10 +65,13 @@ public class Main {
                //after table has been chosen, read all data from it
                List<String> data = databaseImpl.returnAllDataFromTable(con, databaseImpl, stmt, connection, dbQuery, tables, columns);
                //System.out.println(data.toString());
-               Map<Columns,String> map = new HashMap<Columns,String>();
-               map.put(columns.get(0), data.get(0).toString());
-				System.out.println(map);
-            	   
+               Map<String,String> map = new HashMap<String,String>();
+               
+               for (String string : data) {
+				System.out.println(string);
+			}
+         
+            
 			}
             
 	  

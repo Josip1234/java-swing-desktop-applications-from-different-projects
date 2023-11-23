@@ -191,8 +191,9 @@ public class DatabaseImpl implements DatabaseInterface,SelectQuery  {
 				columnName=column.getColumnName();
 				String temp=resultSet.getString(columnName);
 				data.add(temp);
+				
 			}
-			
+			data.add("-");
 		}
 		return data;
 	}
