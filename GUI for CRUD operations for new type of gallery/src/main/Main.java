@@ -69,13 +69,17 @@ public class Main {
                
                int index=0;
                for (String string : data) {
-            	   index++;
+            	   
+            	   System.out.println(columns.get(index).getColumnName()+" "+string); // ovo dodavati u podlistu ili polje, bolje povezati objekte recimo naziv stupca sa re
+            	  
 				   if(string.contentEquals("-")) {
-					   System.out.println(index);
+					   
+					   break;
 				   }
+				   index++;
 			}
          
-            
+         
 			}
             
 	  
