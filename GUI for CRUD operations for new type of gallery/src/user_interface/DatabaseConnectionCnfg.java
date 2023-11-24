@@ -433,11 +433,16 @@ public class DatabaseConnectionCnfg extends JFrame {
         //model.setRowCount(data.size());  
         
         List<String> colNames=new ArrayList<String>();
-        
+        List<String[]> values = new ArrayList<String[]>();
+
       
         for (Columns col : columns) {
 		  colNames.add(col.getColumnName());
 		}
+        
+        for (int i = 0; i < 100; i++) {
+            values.add(new String[] {"val"+i+" col1","val"+i+" col2","val"+i+" col3"});
+        }
         
         model.setColumnIdentifiers(colNames.toArray());
         table = new JTable();
@@ -450,17 +455,8 @@ public class DatabaseConnectionCnfg extends JFrame {
         scroll.setVerticalScrollBarPolicy(
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         
-       //add new vector
-        Vector<String> vectors = new Vector<String>();
-        for (String dat : data) {
-        	  
-        	vectors.add(dat);
- 
-        	
-    			
-    		}
-        //add elements from vector into a row
-       model.addRow(vectors);
+       
+        
         
         frame1.getContentPane().add(scroll);
         frame1.setVisible(true);

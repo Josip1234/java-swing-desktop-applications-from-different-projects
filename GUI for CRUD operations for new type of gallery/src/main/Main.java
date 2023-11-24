@@ -48,6 +48,8 @@ public class Main {
 		//FileMessages messages = new FileMessages();
 		//GeneralFunctions.showMessages("Error",messages,  FileMessages.fieldNotExists);
      
+		
+		
 	   
 			 DatabaseConnection con = new DatabaseConnection();
 		     con.setDB_URL("jdbc:mariadb://localhost/dynamic_gallery");
