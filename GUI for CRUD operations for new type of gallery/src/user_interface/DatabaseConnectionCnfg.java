@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -429,6 +430,8 @@ public class DatabaseConnectionCnfg extends JFrame {
         frame1.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame1.getContentPane().setLayout(new BorderLayout());
         DefaultTableModel model = new DefaultTableModel();
+        //model.setRowCount(data.size());  
+        
         List<String> colNames=new ArrayList<String>();
         
       
@@ -447,15 +450,17 @@ public class DatabaseConnectionCnfg extends JFrame {
         scroll.setVerticalScrollBarPolicy(
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         
-       
-        List<String> temp=data;
-        for(int i=0;i<columns.size();i++) {
-       
-        }
-        
-        for (Columns column : columns) {
-    			model.addRow(new Object[] {column.getColumnName(),column.getColumnType()});
+       //add new vector
+        Vector<String> vectors = new Vector<String>();
+        for (String dat : data) {
+        	  
+        	vectors.add(dat);
+ 
+        	
+    			
     		}
+        //add elements from vector into a row
+       model.addRow(vectors);
         
         frame1.getContentPane().add(scroll);
         frame1.setVisible(true);
