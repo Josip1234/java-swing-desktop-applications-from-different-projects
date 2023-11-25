@@ -426,41 +426,7 @@ public class DatabaseConnectionCnfg extends JFrame {
     }
     
     public void showDataFromTables(JFrame frame1, List<Columns> columns, JTable table, List<String> data) {
-        frame1 = new JFrame("Table data");
-        frame1.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        frame1.getContentPane().setLayout(new BorderLayout());
-        DefaultTableModel model = new DefaultTableModel();
-        //model.setRowCount(data.size());  
         
-        List<String> colNames=new ArrayList<String>();
-        List<String[]> values = new ArrayList<String[]>();
-
-      
-        for (Columns col : columns) {
-		  colNames.add(col.getColumnName());
-		}
-        
-        for (int i = 0; i < 100; i++) {
-            values.add(new String[] {"val"+i+" col1","val"+i+" col2","val"+i+" col3"});
-        }
-        
-        model.setColumnIdentifiers(colNames.toArray());
-        table = new JTable();
-        table.setModel(model);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        table.setFillsViewportHeight(true);
-        JScrollPane scroll = new JScrollPane(table);
-        scroll.setHorizontalScrollBarPolicy(
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scroll.setVerticalScrollBarPolicy(
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        
-       
-        
-        
-        frame1.getContentPane().add(scroll);
-        frame1.setVisible(true);
-        frame1.setSize(400, 300);
     }
     
     

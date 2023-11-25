@@ -27,7 +27,7 @@ public void setColumnType(String columnType) {
 }
 @Override
 public String toString() {
-	return "{\"Columns\":{\"columnName\":\"" + columnName + "\", \"columnType\":\"" + columnType + "\"}}\n";
+	return columnName;
 }
 
 
