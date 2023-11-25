@@ -94,6 +94,7 @@ public class Main {
 			}
                
                model.setColumnIdentifiers(colNames);
+               
                table = new JTable();
                table.setModel(model);
                table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -120,20 +121,23 @@ public class Main {
                }
                //add new vector to store efirst n elements until -
                
-               SwingUtilities.invokeLater(new Runnable(){public void run(){
+            
             	   Vector<String> vc= new Vector<String>();
+            	   //need one more vector
                for(int i=0;i<arrays.length;i++) {
             	   if(arrays[i]=="-") {
             		   System.out.println(vc);
             		   model.addRow(vc);
-            		   vc.clear();
+            		   //after adding nth element initialize new vector.
             		   vc= new Vector<String>();
+            	       
+            		 
             	   }else {
             		   vc.add(arrays[i]);
             	   }
                }
                //Update the model here
-           	}});
+         
            
                
                frame1.getContentPane().add(scroll);
