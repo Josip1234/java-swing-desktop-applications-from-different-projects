@@ -10,10 +10,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -44,6 +47,9 @@ import entities.Tables;
 import implementations.DatabaseImpl;
 import implementations.FileImplementation;
 import implementations.GeneralFunctions;
+import javax.swing.JDesktopPane;
+import javax.swing.JRadioButton;
+import java.awt.Dimension;
 
 public class DatabaseConnectionCnfg extends JFrame {
 
@@ -56,6 +62,17 @@ public class DatabaseConnectionCnfg extends JFrame {
 	private JTextField databaseUrl;
 	private JTextField databaseUser;
 	private JTextField databasePassword;
+	private JLabel lblNewLabel = new JLabel(GeneralMessages.welcome);
+	private JLabel showMes = new JLabel("Show messages:");
+	private JRadioButton logmsg = new JRadioButton("Only log");
+	private JRadioButton popup = new JRadioButton("Show popups");
+	private ButtonGroup buttonGroup = new ButtonGroup();
+	private JButton btnNewButton = new JButton("Save");
+	private JButton btnNewButton2 = new JButton("Save settings");
+	private JLabel LabelForDriver = new JLabel("Insert driver name for database:");
+	private JLabel LabelForDbURL = new JLabel("Insert database URL:");
+	private JLabel LabelForDbUser = new JLabel("Insert database user:");
+	private JLabel LabelForDbUserPass = new JLabel("Insert database password:");
 
 	/**
 	 * Launch the application.
@@ -89,6 +106,53 @@ public class DatabaseConnectionCnfg extends JFrame {
 		
 			menuBar.add(Home);
 			
+			JMenuItem appset = new JMenuItem("Application settings");
+			appset.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					btnNewButton.setVisible(false);
+					databasePassword.setVisible(false);
+					databaseUser.setVisible(false);
+					databaseUrl.setVisible(false);
+					driverName.setVisible(false);
+					LabelForDbUserPass.setVisible(false);
+					LabelForDbUser.setVisible(false);
+					LabelForDbURL.setVisible(false);
+					LabelForDriver.setVisible(false);
+					
+					
+					lblNewLabel.setText(GeneralMessages.setSettings);
+			        showMes.setVisible(true);
+			        popup.setVisible(true);
+					
+			        logmsg.setVisible(true);
+					showMes.setVisible(true);
+					
+				
+					btnNewButton2.setVisible(true);
+					btnNewButton2.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							
+							for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+					            AbstractButton button = buttons.nextElement();
+
+					            if (button.isSelected()) {
+					               System.out.println(button.getText());
+					            }
+					        }
+							
+
+					 
+						}
+					});
+					
+					buttonGroup.add(logmsg);
+					buttonGroup.add(popup);
+						
+				}
+			});
+			Home.add(appset);
+			
 			JMenuItem ReturnToIndex = new JMenuItem("Return home");
 			
 				Home.add(ReturnToIndex);
@@ -119,30 +183,31 @@ public class DatabaseConnectionCnfg extends JFrame {
 	
 		Data.add(ReadData);
 		contentPane = new JPanel();
+		contentPane.setMaximumSize(new Dimension(40000, 32767));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
       
 		setContentPane(contentPane);
 		
-		JLabel lblNewLabel = new JLabel(GeneralMessages.welcome);
+		
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 34));
 		
-		JLabel LabelForDriver = new JLabel("Insert driver name for database:");
+	
 		LabelForDriver.setHorizontalAlignment(SwingConstants.CENTER);
 		LabelForDriver.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		LabelForDriver.setVisible(false);
 		
-		JLabel LabelForDbURL = new JLabel("Insert database URL:");
+	
+		
 		LabelForDbURL.setHorizontalAlignment(SwingConstants.CENTER);
 		LabelForDbURL.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		LabelForDbURL.setVisible(false);
-		
-		JLabel LabelForDbUser = new JLabel("Insert database user:");
+
 		LabelForDbUser.setHorizontalAlignment(SwingConstants.CENTER);
 		LabelForDbUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		LabelForDbUser.setVisible(false);
 		
-		JLabel LabelForDbUserPass = new JLabel("Insert database password:");
+		
 		LabelForDbUserPass.setHorizontalAlignment(SwingConstants.CENTER);
 		LabelForDbUserPass.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		LabelForDbUserPass.setVisible(false);
@@ -166,10 +231,16 @@ public class DatabaseConnectionCnfg extends JFrame {
 		databasePassword.setColumns(10);
 		databasePassword.setVisible(false);
 		
-		JButton btnNewButton = new JButton("Update config");
+		
 
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				   popup.setVisible(false);
+					
+					
+					showMes.setVisible(false);
+					   logmsg.setVisible(false);
+						btnNewButton2.setVisible(false);
 				File file = new File();
 				DatabaseConnection connection = new DatabaseConnection(driverName.getText(),databaseUrl.getText(),databaseUser.getText(),databasePassword.getText());
 		        FileImplementation fileImplementation = new FileImplementation();
@@ -185,6 +256,9 @@ public class DatabaseConnectionCnfg extends JFrame {
 		
 		ChooseTable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				showMes.setVisible(false);
+				   logmsg.setVisible(false);
+					btnNewButton2.setVisible(false);
 				JFrame frame = new JFrame("Choose tables");
 			    lblNewLabel.setText(GeneralMessages.chooseTables);
 				lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -199,12 +273,20 @@ public class DatabaseConnectionCnfg extends JFrame {
 						LabelForDriver.setVisible(false);
 						DatabaseConnection con = new DatabaseConnection();
 						DatabaseImpl databaseImpl = new DatabaseImpl();
-					
+						   popup.setVisible(false);
+							
+							
+							
 						try {
 							
-					
+					        
 							DbQuery dbQuery = new DbQuery("Show tables");
-							
+							showMes.setVisible(false);
+							   popup.setVisible(false);
+								
+							   logmsg.setVisible(false);
+								btnNewButton2.setVisible(false);
+								
 							FileImplementation fileImplementation = new FileImplementation();
 							File file = new File();
 							String valueToParse=fileImplementation.readFromAFile(file);
@@ -231,6 +313,12 @@ public class DatabaseConnectionCnfg extends JFrame {
                             ReadData.setVisible(true);
                         	ReadData.addActionListener(new ActionListener(){
                     			public void actionPerformed(ActionEvent e) {
+                    				showMes.setVisible(false);
+                    				   popup.setVisible(false);
+               						
+               						
+                    				   logmsg.setVisible(false);
+                    					btnNewButton2.setVisible(false);
                     				 final List<Columns> columns;
                                      columns=databaseImpl.readColumnsFromTable(con, connection, statement, table, databaseImpl);
                     				   List<String> data;
@@ -273,6 +361,12 @@ public class DatabaseConnectionCnfg extends JFrame {
 				LabelForDbUser.setVisible(false);
 				LabelForDbURL.setVisible(false);
 				LabelForDriver.setVisible(false);
+				showMes.setVisible(false);
+				   popup.setVisible(false);
+					
+					
+				   logmsg.setVisible(false);
+					btnNewButton2.setVisible(false);
 			}
 		});
 		
@@ -288,6 +382,11 @@ public class DatabaseConnectionCnfg extends JFrame {
 		    				LabelForDbUser.setVisible(true);
 		    				LabelForDbURL.setVisible(true);
 		    				LabelForDriver.setVisible(true);
+		    				showMes.setVisible(false);
+		    				   popup.setVisible(false);
+								
+		    					btnNewButton2.setVisible(false);
+		    				   logmsg.setVisible(false);
 		    				
 		    	DatabaseConnection connection = new DatabaseConnection();
 		    	File file = new File();
@@ -334,68 +433,90 @@ public class DatabaseConnectionCnfg extends JFrame {
  			}
 		});
 		
+	
+		btnNewButton2.setVisible(false);
+		logmsg.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		logmsg.setVisible(false);
+		popup.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		
+		popup.setVisible(false);
+		showMes.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		
+		showMes.setVisible(false);
+		
+		
+		
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(96)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(100)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 600, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(54)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addComponent(LabelForDbUserPass, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE)
-										.addComponent(LabelForDbUser, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(databasePassword, GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
-										.addComponent(databaseUser, GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)))
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-									.addGroup(gl_contentPane.createSequentialGroup()
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+									.addComponent(LabelForDbURL, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 										.addComponent(LabelForDriver, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(driverName))
-									.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(LabelForDbURL, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(databaseUrl, GroupLayout.PREFERRED_SIZE, 371, GroupLayout.PREFERRED_SIZE))))
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addGap(25)
+											.addComponent(showMes)
+											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addComponent(logmsg))))
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+									.addComponent(LabelForDbUserPass, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE)
+									.addComponent(LabelForDbUser, GroupLayout.PREFERRED_SIZE, 237, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(databasePassword, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+								.addComponent(databaseUrl, GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(14)
+									.addComponent(popup)
+									.addGap(28)
+									.addComponent(btnNewButton2, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
+								.addComponent(driverName, Alignment.TRAILING, 377, 377, Short.MAX_VALUE)
+								.addComponent(databaseUser, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE))
 							.addGap(18)
-							.addComponent(btnNewButton)
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addGap(46))
+							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 600, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(18)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(showMes)
+						.addComponent(logmsg)
+						.addComponent(popup)
+						.addComponent(btnNewButton2, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+					.addGap(15)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(LabelForDriver, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 								.addComponent(driverName, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
-							.addGap(26)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(databaseUrl, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-								.addComponent(LabelForDbURL, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+								.addComponent(LabelForDbURL, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+								.addComponent(databaseUrl, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(databaseUser, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-								.addComponent(LabelForDbUser, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
-							.addGap(27)
+								.addComponent(LabelForDbUser, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+								.addComponent(databaseUser, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(databasePassword, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-								.addComponent(LabelForDbUserPass, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(18)
-							.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)))
-					.addGap(46))
+								.addComponent(LabelForDbUserPass, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap(77, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
@@ -491,6 +612,4 @@ public class DatabaseConnectionCnfg extends JFrame {
         
 
     }
-    
-    
 }
