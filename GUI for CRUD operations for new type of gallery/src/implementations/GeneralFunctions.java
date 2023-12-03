@@ -24,7 +24,7 @@ public class GeneralFunctions {
 		DatabaseConnection connection = new DatabaseConnection();
 		File file = new File();
 	    FileImplementation fileImplementation = new FileImplementation();
-	    doesFileExists=fileImplementation.checkIfFileExists(file);
+	    doesFileExists=fileImplementation.checkIfFileExists(file,file.getFilename());
 	    if(doesFileExists==true) {
 	    	//System.out.println(FileMessages.readingFromFile);
 	    	String value=fileImplementation.readFromAFile(file);

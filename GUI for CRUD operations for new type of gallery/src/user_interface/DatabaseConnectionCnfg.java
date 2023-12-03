@@ -391,9 +391,10 @@ public class DatabaseConnectionCnfg extends JFrame {
 		    	DatabaseConnection connection = new DatabaseConnection();
 		    	File file = new File();
 		    	FileImplementation fileImplementation = new FileImplementation();
-		    	if(fileImplementation.checkIfFileExists(file)==true) {
+		    	if(fileImplementation.checkIfFileExists(file,file.getFilename())==true) {
 		    		System.out.println(FileMessages.readingFromFile);
 		    		
+		    		//parsing function is needed for putting labels to text label on swing window
 		    		String value=fileImplementation.readFromAFile(file);
 		    	    String element=value;
 		            element=fileImplementation.parse(element, "JDBC_DRIVER");

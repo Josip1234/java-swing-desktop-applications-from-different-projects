@@ -14,15 +14,15 @@ public File() {
 }
 
 public String getFilename() {
-	return fileName;
+	return this.fileName;
 }
 
 public String getAppConfigFileName() {
-   return appConfig;	
+   return this.appConfig;	
 }
 
 public String getLogFile() {
-	return logFile;
+	return this.logFile;
 }
 
 }

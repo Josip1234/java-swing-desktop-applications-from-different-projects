@@ -3,12 +3,14 @@ package implementations;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import entities.ApplicationSettings;
 import entities.DatabaseConnection;
 import entities.DatabaseMessages;
 import entities.File;
@@ -70,12 +72,26 @@ public class FileImplementation implements FileOperations {
 	}
 
 	@Override
-	public boolean checkIfFileExists(File file) {
+	public boolean checkIfFileExists(File file,String whatFile) {
 		boolean exists=false;
-		java.io.File files = new java.io.File(file.getFilename());
-		if(files.exists()) exists=true;
+		java.io.File files=returninstanceOfFile(file, whatFile);
+
+		if(files.exists()==true) exists=true;
 		else exists=false;
 		return exists;
+	}
+	
+	//return instance of java.io.file depending of file in class entity file
+	public java.io.File returninstanceOfFile(File file,String whatfile) {
+		java.io.File files=null;
+		if(whatfile.contentEquals(file.getFilename())) {
+			files = new java.io.File(file.getFilename());
+		}else if(whatfile.contentEquals(file.getAppConfigFileName())) {
+			files = new java.io.File(file.getAppConfigFileName());
+		}else if(whatfile.contentEquals(file.getLogFile())) {
+			files = new java.io.File(file.getLogFile());
+		}
+		return files;
 	}
 
 	@Override
@@ -147,6 +163,33 @@ public class FileImplementation implements FileOperations {
 	public void printString(String string) {
 		System.out.println(string);
 		
+	}
+
+	@Override
+	public boolean createFileIfFileDoesNotExists(File file, String whatFileToCreate) {
+		boolean exists=false;
+		boolean created=false;
+		exists=checkIfFileExists(file,whatFileToCreate);
+     
+		if(exists==true) {
+			exists=true;
+			created=false;
+		
+		}else {
+			System.out.println("ne postoji");
+			java.io.File fil= returninstanceOfFile(file, whatFileToCreate);
+			try {
+				FileOutputStream fileOutputStream = new FileOutputStream(fil);
+				fileOutputStream.close();
+				created=true;
+				System.out.println("kreiran je file");
+			} catch (IOException e) {
+			   created=false;
+System.out.println("nije kreiran file");
+				e.printStackTrace();
+			}
+		}
+		return created;
 	}
 
 }
