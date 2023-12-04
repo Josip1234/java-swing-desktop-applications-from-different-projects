@@ -81,6 +81,12 @@ public class DatabaseConnectionCnfg extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					//we need to check if files already exists so we need to make new files if they dont exists onload, also number of files depends on list of file names in class file
+					File file = new File();
+					FileImplementation fileImplementation = new FileImplementation();
+					fileImplementation.createFileIfFileDoesNotExists(file, file.getAppConfigFileName());
+					fileImplementation.createFileIfFileDoesNotExists(file, file.getFilename());
+					fileImplementation.createFileIfFileDoesNotExists(file, file.getLogFile());
 					DatabaseConnectionCnfg frame = new DatabaseConnectionCnfg();
 					frame.setVisible(true);
 				} catch (Exception e) {
