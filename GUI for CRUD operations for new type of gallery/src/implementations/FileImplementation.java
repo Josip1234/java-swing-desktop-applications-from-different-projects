@@ -48,6 +48,7 @@ public class FileImplementation implements FileOperations {
 
 	@Override
 	public String readFromAFile(File file) {
+		//read from a file values return value from a file, need to modify this function to make it valid for all files not for database only
 		String value="";
 		Scanner input = null;
 		try {
@@ -97,7 +98,10 @@ public class FileImplementation implements FileOperations {
 	@Override
 	public String parse(String element, String wordToParse) {
 		String parsed="";
+		
 		if(wordToParse.contentEquals("JDBC_DRIVER")) {
+			//parse is temp variable to remeber main string, no functzionality here, backup for testing purposes, first element is value to parse, second what to parse
+			//modified function to parse application settings file
 		    parsed=element;
 	       parsed=parsed.replace('{', ' ');
 	       parsed=parsed.replace('"', ' ');
@@ -150,7 +154,20 @@ public class FileImplementation implements FileOperations {
 		       parsed=parsed.trim();
 		       printString(parsed);
 			    
-		}else {
+		}else if(wordToParse.contentEquals("showMessages")) {
+			//{"ApplicationSettings":{"showMessages":"Show popups"}}
+            parsed=element;
+            parsed=parsed.replace('{', ' ');
+            parsed=parsed.replace('"', ' ');
+            parsed=parsed.replace('}', ' ');
+            parsed=parsed.replace(':', ' ');
+            parsed=parsed.trim();
+            parsed=parsed.replaceAll("ApplicationSettings   ", "");
+            parsed=parsed.replaceAll("showMessages", "");
+            parsed=parsed.trim();
+            printString(parsed);
+		}
+		else {
 			FileMessages messages = new FileMessages();
 			GeneralFunctions.showMessages("Error",messages,  FileMessages.fieldNotExists);
 		
@@ -192,7 +209,7 @@ System.out.println("nije kreiran file");
 		return created;
 	}
 
-	@Override
+	@Override  //first function is duplicate need to implement his differently in version 2 of application, we need to merge it 
 	public boolean writeToAFile(File file, ApplicationSettings applicationSettings,String whatFileInClass) {
 		boolean done=false;
 		PrintWriter outPrintWriter = null;

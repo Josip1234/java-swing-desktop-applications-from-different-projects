@@ -301,6 +301,7 @@ public class DatabaseConnectionCnfg extends JFrame {
 								
 							FileImplementation fileImplementation = new FileImplementation();
 							File file = new File();
+							//read values from file arse it then set it into input text field, element is a value from file
 							String valueToParse=fileImplementation.readFromAFile(file);
 							con.setDB_URL(fileImplementation.parse(valueToParse, "DB_URL"));
 							con.setJDBC_DRIVER(fileImplementation.parse(valueToParse, "JDBC_DRIVER"));
