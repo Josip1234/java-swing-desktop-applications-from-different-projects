@@ -36,6 +36,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import entities.ApplicationSettings;
 import entities.Columns;
 import entities.DatabaseConnection;
 import entities.DatabaseMessages;
@@ -143,7 +144,12 @@ public class DatabaseConnectionCnfg extends JFrame {
 					            AbstractButton button = buttons.nextElement();
 
 					            if (button.isSelected()) {
-					               System.out.println(button.getText());
+					            	//if button is clicked save it to file
+					            	ApplicationSettings applicationSettings = new ApplicationSettings();
+					            	applicationSettings.setShowMessages(button.getText());
+					                FileImplementation fileImplementation = new FileImplementation();
+					                File file = new File();
+					                fileImplementation.writeToAFile(file, applicationSettings,file.getAppConfigFileName());
 					            }
 					        }
 							

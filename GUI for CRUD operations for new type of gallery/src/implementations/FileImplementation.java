@@ -192,4 +192,31 @@ System.out.println("nije kreiran file");
 		return created;
 	}
 
+	@Override
+	public boolean writeToAFile(File file, ApplicationSettings applicationSettings,String whatFileInClass) {
+		boolean done=false;
+		PrintWriter outPrintWriter = null;
+		try {
+		
+			FileMessages messages = new FileMessages();
+			GeneralFunctions.showMessages("Info",messages,   FileMessages.writingToAFile);
+			if(whatFileInClass.contentEquals(file.getAppConfigFileName())) {
+				outPrintWriter=new PrintWriter(new FileOutputStream(file.getAppConfigFileName()));
+				outPrintWriter.println(applicationSettings.toString());
+			}
+			
+			messages = new FileMessages();
+			GeneralFunctions.showMessages("Info",messages,   FileMessages.finishedWriting);
+			outPrintWriter.close();
+			
+		} catch (FileNotFoundException e) {
+			FileMessages messages = new FileMessages();
+			GeneralFunctions.showMessages("Error",messages,  FileMessages.errorOpeningTheFiles);
+		
+			done=false;
+			e.printStackTrace();
+		}
+		return done;
+	}
+
 }

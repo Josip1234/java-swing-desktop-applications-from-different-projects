@@ -1,5 +1,6 @@
 package interfaces;
 
+import entities.ApplicationSettings;
 import entities.DatabaseConnection;
 import entities.File;
 
@@ -13,5 +14,7 @@ public interface FileOperations {
       String parse(String element,String wordToParse);
       void printString(String string);
       //return instancwe of file denending on file class
-      public java.io.File returninstanceOfFile(File file,String whatfile); 
+      public java.io.File returninstanceOfFile(File file,String whatfile);
+      //write to a file some value into a file from file class This value will be selected setting for a log, for example
+      boolean writeToAFile(File file, ApplicationSettings applicationSettings, String whatFileInClass);
 }
