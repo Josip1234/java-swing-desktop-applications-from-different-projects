@@ -48,6 +48,8 @@ import entities.Tables;
 import implementations.DatabaseImpl;
 import implementations.FileImplementation;
 import implementations.GeneralFunctions;
+import interfaces.FileOperations;
+
 import javax.swing.JDesktopPane;
 import javax.swing.JRadioButton;
 import java.awt.Dimension;
@@ -116,6 +118,24 @@ public class DatabaseConnectionCnfg extends JFrame {
 			JMenuItem appset = new JMenuItem("Application settings");
 			appset.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					File file = new File();
+					FileImplementation fileImplementation = new FileImplementation();
+					ApplicationSettings applicationSettings = new ApplicationSettings();
+					String element=fileImplementation.readFromAFile(file, file.getAppConfigFileName());
+					applicationSettings.setShowMessages(fileImplementation.parse(element, "showMessages"));
+					
+					//set values depended on user settings in file
+					if(applicationSettings.getShowMessages().contentEquals(GeneralMessages.log)) {
+						
+						logmsg.setSelected(true);
+					}else if(applicationSettings.getShowMessages().contentEquals(GeneralMessages.popups)) {
+				
+						popup.setSelected(true);
+					}else {
+					
+						popup.setSelected(true);
+					}
 					
 					btnNewButton.setVisible(false);
 					databasePassword.setVisible(false);
@@ -302,7 +322,7 @@ public class DatabaseConnectionCnfg extends JFrame {
 							FileImplementation fileImplementation = new FileImplementation();
 							File file = new File();
 							//read values from file arse it then set it into input text field, element is a value from file
-							String valueToParse=fileImplementation.readFromAFile(file);
+							String valueToParse=fileImplementation.readFromAFile(file,file.getFilename());
 							con.setDB_URL(fileImplementation.parse(valueToParse, "DB_URL"));
 							con.setJDBC_DRIVER(fileImplementation.parse(valueToParse, "JDBC_DRIVER"));
 							con.setUSER(fileImplementation.parse(valueToParse, "USER"));
@@ -408,7 +428,7 @@ public class DatabaseConnectionCnfg extends JFrame {
 		    		System.out.println(FileMessages.readingFromFile);
 		    		
 		    		//parsing function is needed for putting labels to text label on swing window
-		    		String value=fileImplementation.readFromAFile(file);
+		    		String value=fileImplementation.readFromAFile(file,file.getFilename());
 		    	    String element=value;
 		            element=fileImplementation.parse(element, "JDBC_DRIVER");
 		            connection.setJDBC_DRIVER(element);

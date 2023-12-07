@@ -47,12 +47,17 @@ public class FileImplementation implements FileOperations {
 	}
 
 	@Override
-	public String readFromAFile(File file) {
+	public String readFromAFile(File file,String whatFileToRead) {
 		//read from a file values return value from a file, need to modify this function to make it valid for all files not for database only
 		String value="";
 		Scanner input = null;
 		try {
-			input=new Scanner(new FileInputStream(file.getFilename()));
+			if(whatFileToRead.contentEquals(file.getFilename())) {
+				input=new Scanner(new FileInputStream(file.getFilename()));
+			}else if(whatFileToRead.contentEquals(file.getAppConfigFileName())) {
+				input=new Scanner(new FileInputStream(file.getAppConfigFileName()));
+			}
+			
 			FileMessages messages = new FileMessages();
 			GeneralFunctions.showMessages("Info",messages,   FileMessages.readingFromFile);
 			value = input.nextLine();

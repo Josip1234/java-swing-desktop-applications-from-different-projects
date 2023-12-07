@@ -27,7 +27,7 @@ public class GeneralFunctions {
 	    doesFileExists=fileImplementation.checkIfFileExists(file,file.getFilename());
 	    if(doesFileExists==true) {
 	    	//System.out.println(FileMessages.readingFromFile);
-	    	String value=fileImplementation.readFromAFile(file);
+	    	String value=fileImplementation.readFromAFile(file,file.getFilename());
 	        //System.out.println(value);
 	    	//stavi u text field
 	    
@@ -163,7 +163,7 @@ public class GeneralFunctions {
 	public static List<Tables> getListOfTables(FileImplementation fileImplementation, File file, Connection connection, Statement statement, DatabaseConnection con, DatabaseImpl databaseImpl, DbQuery dbQuery) throws SQLException{
 		List<Tables> tables = new ArrayList<Tables>();
 
-		String valueToParse=fileImplementation.readFromAFile(file);
+		String valueToParse=fileImplementation.readFromAFile(file,file.getFilename());
 
 		con.setDB_URL(fileImplementation.parse(valueToParse, "DB_URL"));
 		
