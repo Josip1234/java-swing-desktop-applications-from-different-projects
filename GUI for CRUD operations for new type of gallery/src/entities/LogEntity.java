@@ -42,7 +42,7 @@ public class LogEntity {
 	@Override
 	public String toString() {
 		return "{\"LogEntity\":{\"index\":\"" + index + "\", \"currentDate\":\"" + currentDate + "\", \"message\":\""
-				+ message + "\"}}\n";
+				+ message + "\"}}";
 	}
 	
 	

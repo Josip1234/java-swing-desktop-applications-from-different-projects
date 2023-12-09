@@ -1,2 +1,5 @@
 {"LogEntity":{"index":"1", "currentDate":"09.12.2023 14:09:05", "message":"Application has been terminated."}}
 
+{"LogEntity":{"index":"1", "currentDate":"09.12.2023 14:13:02", "message":"Application has been terminated."}}
+
+{"LogEntity":{"index":"1", "currentDate":"09.12.2023 14:14:07", "message":"Application has been terminated."}}

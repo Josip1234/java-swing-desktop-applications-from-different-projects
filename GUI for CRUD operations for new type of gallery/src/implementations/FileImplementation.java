@@ -227,7 +227,7 @@ System.out.println("nije kreiran file");
 				outPrintWriter=new PrintWriter(new FileOutputStream(file.getAppConfigFileName()));
 				outPrintWriter.println(applicationSettings.toString());
 			}else if(whatFileInClass.contentEquals(file.getLogFile())) {
-				outPrintWriter=new PrintWriter(new FileOutputStream(file.getLogFile()));
+				outPrintWriter=new PrintWriter(new FileOutputStream(file.getLogFile(),true));
 				outPrintWriter.println(entity.toString());
 			}
 			
