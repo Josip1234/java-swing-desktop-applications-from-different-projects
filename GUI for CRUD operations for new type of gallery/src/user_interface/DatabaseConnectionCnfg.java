@@ -169,7 +169,7 @@ public class DatabaseConnectionCnfg extends JFrame {
 					            	applicationSettings.setShowMessages(button.getText());
 					                FileImplementation fileImplementation = new FileImplementation();
 					                File file = new File();
-					                fileImplementation.writeToAFile(file, applicationSettings,file.getAppConfigFileName());
+					                fileImplementation.writeToAFile(file, applicationSettings,file.getAppConfigFileName(),null);
 					            }
 					        }
 							

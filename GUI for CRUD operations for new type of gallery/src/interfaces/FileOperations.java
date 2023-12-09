@@ -3,6 +3,7 @@ package interfaces;
 import entities.ApplicationSettings;
 import entities.DatabaseConnection;
 import entities.File;
+import entities.LogEntity;
 
 public interface FileOperations {
 	//create file if not exists, but we need to check what file to create in class of entity file
@@ -16,5 +17,5 @@ public interface FileOperations {
       //return instancwe of file denending on file class
       public java.io.File returninstanceOfFile(File file,String whatfile);
       //write to a file some value into a file from file class This value will be selected setting for a log, for example
-      boolean writeToAFile(File file, ApplicationSettings applicationSettings, String whatFileInClass);
+      boolean writeToAFile(File file, ApplicationSettings applicationSettings, String whatFileInClass, LogEntity entity);
 }

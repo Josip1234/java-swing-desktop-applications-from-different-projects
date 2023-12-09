@@ -15,6 +15,7 @@ import entities.DatabaseConnection;
 import entities.DatabaseMessages;
 import entities.File;
 import entities.FileMessages;
+import entities.LogEntity;
 import interfaces.FileOperations;
 
 public class FileImplementation implements FileOperations {
@@ -215,7 +216,7 @@ System.out.println("nije kreiran file");
 	}
 
 	@Override  //first function is duplicate need to implement his differently in version 2 of application, we need to merge it 
-	public boolean writeToAFile(File file, ApplicationSettings applicationSettings,String whatFileInClass) {
+	public boolean writeToAFile(File file, ApplicationSettings applicationSettings,String whatFileInClass, LogEntity entity) {
 		boolean done=false;
 		PrintWriter outPrintWriter = null;
 		try {
@@ -225,6 +226,9 @@ System.out.println("nije kreiran file");
 			if(whatFileInClass.contentEquals(file.getAppConfigFileName())) {
 				outPrintWriter=new PrintWriter(new FileOutputStream(file.getAppConfigFileName()));
 				outPrintWriter.println(applicationSettings.toString());
+			}else if(whatFileInClass.contentEquals(file.getLogFile())) {
+				outPrintWriter=new PrintWriter(new FileOutputStream(file.getLogFile()));
+				outPrintWriter.println(entity.toString());
 			}
 			
 			messages = new FileMessages();
