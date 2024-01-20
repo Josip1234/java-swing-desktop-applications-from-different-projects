@@ -163,6 +163,7 @@ public class DatabaseImpl implements DatabaseInterface,SelectQuery  {
 					columns.setTableName(resultSet.getString("TABLE_NAME"));
 					columns.setColumnName(resultSet.getString("COLUMN_NAME"));
 					columns.setColumnType(resultSet.getString("DATA_TYPE"));
+					System.out.println(columns.getColumnName());
 				    col.add(columns);
 				}
 			} catch (SQLException e) {

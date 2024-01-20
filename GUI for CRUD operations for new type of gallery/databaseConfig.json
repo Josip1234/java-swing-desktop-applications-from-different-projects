@@ -1,2 +1,2 @@
-{"DatabaseConnection":{"JDBC_DRIVER":"org.mariadb.jdbc.Driver", "DB_URL":"jdbc:mariadb://localhost/dynamic_gallery", "USER":"root", "PASS":""}}
+{"DatabaseConnection":{"JDBC_DRIVER":"org.mariadb.jdbc.Driver", "DB_URL":"jdbc:mariadb://127.0.0.1./dynamic_gallery", "USER":"root", "PASS":""}}
 
