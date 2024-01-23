@@ -163,8 +163,14 @@ public class DatabaseImpl implements DatabaseInterface,SelectQuery  {
 					columns.setTableName(resultSet.getString("TABLE_NAME"));
 					columns.setColumnName(resultSet.getString("COLUMN_NAME"));
 					columns.setColumnType(resultSet.getString("DATA_TYPE"));
-				
-				    col.add(columns);
+					//fix for unnecessary columns
+				     if(columns.getColumnName().contentEquals("Host")){
+				    	 break;
+				     }else {
+				    	   col.add(columns);
+				     }
+				   
+				 
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

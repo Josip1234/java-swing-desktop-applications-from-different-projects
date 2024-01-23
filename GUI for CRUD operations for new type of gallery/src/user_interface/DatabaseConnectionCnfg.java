@@ -205,13 +205,16 @@ public class DatabaseConnectionCnfg extends JFrame {
 		Db.add(DatabaseOptions);
 		
 		JMenuItem ChooseTable = new JMenuItem("Choose Table");
+		ChooseTable.setVisible(false);
 	
 		Db.add(ChooseTable);
 		
 		JMenu Data = new JMenu("Data");
+		Data.setVisible(false);
 		menuBar.add(Data);
 		
 		JMenuItem ReadData = new JMenuItem("Read data from table");
+		ReadData.setVisible(false);
 	
 		Data.add(ReadData);
 		contentPane = new JPanel();
@@ -244,8 +247,6 @@ public class DatabaseConnectionCnfg extends JFrame {
 		LabelForDbUserPass.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		LabelForDbUserPass.setVisible(false);
 	
-		ReadData.setVisible(false);
-	
 		
 		driverName = new JTextField();
 		driverName.setColumns(10);
@@ -273,11 +274,13 @@ public class DatabaseConnectionCnfg extends JFrame {
 					showMes.setVisible(false);
 					   logmsg.setVisible(false);
 						btnNewButton2.setVisible(false);
+						
 				File file = new File();
 				DatabaseConnection connection = new DatabaseConnection(driverName.getText(),databaseUrl.getText(),databaseUser.getText(),databasePassword.getText());
 		        FileImplementation fileImplementation = new FileImplementation();
 
 		        fileImplementation.writeToAFile(file, connection);
+		        ChooseTable.setVisible(true);
 
 		 
 			}
@@ -306,6 +309,7 @@ public class DatabaseConnectionCnfg extends JFrame {
 						DatabaseConnection con = new DatabaseConnection();
 						DatabaseImpl databaseImpl = new DatabaseImpl();
 						   popup.setVisible(false);
+						   
 							
 							
 							
@@ -327,7 +331,7 @@ public class DatabaseConnectionCnfg extends JFrame {
 							con.setJDBC_DRIVER(fileImplementation.parse(valueToParse, "JDBC_DRIVER"));
 							con.setUSER(fileImplementation.parse(valueToParse, "USER"));
 							con.setPASS(fileImplementation.parse(valueToParse, "PASS"));
-							
+							Data.setVisible(true);
 				            
 					        Connection connection=null;
 					        Statement statement=null;
