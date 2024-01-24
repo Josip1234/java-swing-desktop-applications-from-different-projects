@@ -1,9 +1,9 @@
 package user_interface;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -20,7 +19,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -28,6 +26,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -48,11 +47,6 @@ import entities.Tables;
 import implementations.DatabaseImpl;
 import implementations.FileImplementation;
 import implementations.GeneralFunctions;
-import interfaces.FileOperations;
-
-import javax.swing.JDesktopPane;
-import javax.swing.JRadioButton;
-import java.awt.Dimension;
 
 public class DatabaseConnectionCnfg extends JFrame {
 

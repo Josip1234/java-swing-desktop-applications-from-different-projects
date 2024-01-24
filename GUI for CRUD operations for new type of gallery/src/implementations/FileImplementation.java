@@ -7,12 +7,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import entities.ApplicationSettings;
 import entities.DatabaseConnection;
-import entities.DatabaseMessages;
 import entities.File;
 import entities.FileMessages;
 import entities.LogEntity;

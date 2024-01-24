@@ -2,13 +2,9 @@ package main;
 
 import java.awt.BorderLayout;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -16,21 +12,13 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import entities.Columns;
 import entities.DatabaseConnection;
-import entities.DatabaseMessages;
 import entities.DbQuery;
-import entities.File;
-import entities.FileMessages;
-
 import entities.Tables;
 import implementations.DatabaseImpl;
-import implementations.FileImplementation;
-import implementations.GeneralFunctions;
 
 public class Main {
 
@@ -68,7 +56,8 @@ public class Main {
 			Connection connection = databaseImpl.openConnection(con, null, stmt);
 			stmt = connection.createStatement();
 			   DbQuery dbQuery = new DbQuery("Show tables");
-               List<Tables> tab=databaseImpl.returnListOfTables(con, databaseImpl, stmt, connection, dbQuery);
+               @SuppressWarnings("unused")
+			List<Tables> tab=databaseImpl.returnListOfTables(con, databaseImpl, stmt, connection, dbQuery);
                //System.out.println(tab.toString());
                //System.out.println("Show table columns and data types");
                Tables tables = new Tables("storage_system");
@@ -77,7 +66,8 @@ public class Main {
                //after table has been chosen, read all data from it
                List<String> data = databaseImpl.returnAllDataFromTable(con, databaseImpl, stmt, connection, dbQuery, tables, columns);
                //System.out.println(data.toString());
-               Map<String,String> map = new HashMap<String,String>();
+               @SuppressWarnings("unused")
+			Map<String,String> map = new HashMap<String,String>();
                
                JFrame frame1;
                JTable table;

@@ -1,9 +1,5 @@
 package entities;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-
 public class DatabaseConnection {
 private String JDBC_DRIVER;
 private String DB_URL;

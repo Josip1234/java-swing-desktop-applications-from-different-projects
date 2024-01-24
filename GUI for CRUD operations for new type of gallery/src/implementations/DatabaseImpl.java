@@ -8,9 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import entities.Columns;
 import entities.DatabaseConnection;
 import entities.DatabaseMessages;

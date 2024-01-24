@@ -27,7 +27,8 @@ public class GeneralFunctions {
 	    doesFileExists=fileImplementation.checkIfFileExists(file,file.getFilename());
 	    if(doesFileExists==true) {
 	    	//System.out.println(FileMessages.readingFromFile);
-	    	String value=fileImplementation.readFromAFile(file,file.getFilename());
+	    	@SuppressWarnings("unused")
+			String value=fileImplementation.readFromAFile(file,file.getFilename());
 	        //System.out.println(value);
 	    	//stavi u text field
 	    
