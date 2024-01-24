@@ -78,6 +78,8 @@ public class DatabaseConnectionCnfg extends JFrame {
 	private JLabel LabelForDbUserPass = new JLabel("Insert database password:");
 	//part of the fix for multiple tables it will count how many times function has been used
 	public static int used=0;
+	//adding as a part of function use
+	public static String previousUsedTable="";
 
 	/**
 	 * Launch the application.
@@ -343,7 +345,8 @@ public class DatabaseConnectionCnfg extends JFrame {
 						    Object[] possib= {};
 						    possib=list.toArray();
 						    Tables table=(Tables)JOptionPane.showInputDialog(frame,"Choose table:","",JOptionPane.INFORMATION_MESSAGE,null,possib,"Select");
-                           
+						    //set new previous used table
+                            previousUsedTable=table.getTableName();
                             List<Columns> columns = new ArrayList<Columns>();
                             columns=databaseImpl.readColumnsFromTable(con, connection, statement, table, databaseImpl);
                              
@@ -561,6 +564,9 @@ public class DatabaseConnectionCnfg extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
     public void showTableData(JFrame frame1, List<Columns> columns, JTable table) {
+    	if(used>1) {
+    		System.out.println(previousUsedTable);
+    	}else {
         frame1 = new JFrame("Database Search Result");
         frame1.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame1.getContentPane().setLayout(new BorderLayout());
@@ -584,15 +590,21 @@ public class DatabaseConnectionCnfg extends JFrame {
         frame1.getContentPane().add(scroll);
         frame1.setVisible(true);
         frame1.setSize(400, 300);
+    	}
     }
     
     public void showDataFromTables(JFrame frame1, List<Columns> columns, JTable table, List<String> data) {
-    	//count number of use of function, we could put it into a log file 
+    	//count number of use of function, we could put it into a log file conition will open table data only after first time is used
     	used++;
     	System.out.println("Function has been used for: "+used+" times");
+    	if(used>1) {
+    		System.out.println(previousUsedTable);
+    	}else {
+    		
+    	
  
         frame1 = new JFrame("Data from tables");
-        frame1.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frame1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame1.getContentPane().setLayout(new BorderLayout());
         DefaultTableModel model = new DefaultTableModel();
         String[] colNames = new String[columns.size()];
@@ -653,7 +665,7 @@ public class DatabaseConnectionCnfg extends JFrame {
         frame1.getContentPane().add(scroll);
         frame1.setVisible(true);
         frame1.setSize(400, 300);
-        
+    	}
 
     }
 }
