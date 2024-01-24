@@ -76,6 +76,8 @@ public class DatabaseConnectionCnfg extends JFrame {
 	private JLabel LabelForDbURL = new JLabel("Insert database URL:");
 	private JLabel LabelForDbUser = new JLabel("Insert database user:");
 	private JLabel LabelForDbUserPass = new JLabel("Insert database password:");
+	//part of the fix for multiple tables it will count how many times function has been used
+	public static int used=0;
 
 	/**
 	 * Launch the application.
@@ -585,6 +587,10 @@ public class DatabaseConnectionCnfg extends JFrame {
     }
     
     public void showDataFromTables(JFrame frame1, List<Columns> columns, JTable table, List<String> data) {
+    	//count number of use of function, we could put it into a log file 
+    	used++;
+    	System.out.println("Function has been used for: "+used+" times");
+ 
         frame1 = new JFrame("Data from tables");
         frame1.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame1.getContentPane().setLayout(new BorderLayout());
